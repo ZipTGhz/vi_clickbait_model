@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>VN Anti-Clickbait Shield</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="popup-container">
+    <!-- HEADER -->
+    <header class="popup-header">
+      <div class="brand">
+        <span class="brand-icon">🛡️</span>
+        <div>
+          <div class="brand-title">Anti-Clickbait VN</div>
+          <div class="brand-sub" id="engine-status-text">Đang kiểm tra kết nối AI...</div>
+        </div>
+      </div>
+      <label class="switch" title="Bật/Tắt lá chắn trên trình duyệt">
+        <input type="checkbox" id="toggle-enabled" checked />
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="tab-dashboard">🛡️ Bảng điều khiển</button>
+      <button class="tab-btn" data-tab="tab-checker">🔎 Kiểm tra nhanh</button>
+    </nav>
+
+    <!-- TAB 1: DASHBOARD BẢO VỆ & CÁ NHÂN HÓA -->
+    <section id="tab-dashboard" class="tab-panel active">
+      <div class="section-label">HIỆU QUẢ BẢO VỆ CỦA BẠN</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value danger" id="stat-cb-count">0 bài</div>
+          <div class="stat-desc">Đã cảnh báo / làm mờ</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value accent" id="stat-time-saved">~0 phút</div>
+          <div class="stat-desc">Thời gian tiết kiệm</div>
+        </div>
+      </div>
+
+      <!-- TRANG HIỆN TẠI -->
+      <div class="current-page-box">
+        <div class="cp-header">
+          <span class="cp-domain" id="cp-domain">🌐 Trang hiện tại</span>
+          <span class="cp-clean-badge" id="cp-clean-score">Độ sạch: --%</span>
+        </div>
+        <div class="cp-details" id="cp-details">
+          Đang thống kê các tiêu đề bài báo trên tab này...
+        </div>
+        <div class="cp-actions">
+          <button class="btn-secondary" id="btn-rescan">🔄 Quét lại trang</button>
+          <button class="btn-primary-outline" id="btn-open-demo">📰 Trang báo thử nghiệm</button>
+        </div>
+      </div>
+
+      <!-- CHẾ ĐỘ BẢO VỆ -->
+      <div class="section-label">CHẾ ĐỘ BẢO VỆ TỰ ĐỘNG</div>
+      <div class="settings-list">
+        <label class="setting-row">
+          <span>🙈 Tự động làm mờ (Blur) tít câu view</span>
+          <input type="checkbox" id="toggle-blur" />
+        </label>
+        <label class="setting-row">
+          <span>💡 Hiện tóm tắt Sapo khi rê chuột</span>
+          <input type="checkbox" id="toggle-hover" checked />
+        </label>
+        <label class="setting-row">
+          <span>🧭 Hiện Trợ lý Đọc Báo góc màn hình</span>
+          <input type="checkbox" id="toggle-reading-pill" checked />
+        </label>
+      </div>
+
+      <!-- ĐỘ NHẠY BỘ LỌC -->
+      <div class="section-label">
+        <span>ĐỘ NHẠY BỘ LỌC</span>
+        <span id="sensitivity-label" class="sens-badge">Cân bằng (50%)</span>
+      </div>
+      <div class="slider-box">
+        <span class="slider-end">Nghiêm ngặt</span>
+        <input type="range" id="slider-sensitivity" min="0.35" max="0.70" step="0.05" value="0.50" />
+        <span class="slider-end">Thoải mái</span>
+      </div>
+    </section>
+
+    <!-- TAB 2: KIỂM TRA NHANH VĂN BẢN (DÀNH CHO NGHIÊN CỨU / KIỂM CHỨNG) -->
+    <section id="tab-checker" class="tab-panel">
+      <div class="checker-form">
+        <label class="input-label">Tiêu đề bài báo cần kiểm tra</label>
+        <textarea id="quick-title" rows="2" placeholder="Dán tiêu đề bài báo tiếng Việt vào đây..."></textarea>
+
+        <label class="input-label">Đoạn mở đầu / Sapo (Tùy chọn)</label>
+        <textarea id="quick-lead" rows="2" placeholder="Dán đoạn mở đầu để đối chiếu độ lệch ngữ nghĩa..."></textarea>
+
+        <button class="btn-primary-full" id="btn-quick-check">🚀 Phân tích ngay</button>
+      </div>
+
+      <div id="quick-result-box" class="quick-result-box hidden"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="popup-footer">
+      <a href="http://127.0.0.1:7860" target="_blank" id="link-gradio">📊 Mở Dashboard Gradio & XAI</a>
+      <button class="btn-link" id="btn-reset-stats" title="Đặt lại bộ đếm thống kê">Đặt lại thống kê</button>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

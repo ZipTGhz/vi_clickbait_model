@@ -1,0 +1,216 @@
+/**
+ * Stylesheet cho Tầng 1 (In-Page Ambient Badges & Hover Tooltip)
+ * và Tầng 2 (Reading Assistant Floating Pill) — VN Anti-Clickbait Shield.
+ * Tất cả class đều có tiền tố .vn-acb- để không xung đột với CSS gốc của các báo điện tử.
+ */
+
+/* 1. NHÃN TÍN HIỆU GẮN CẠNH TIÊU ĐỀ (AMBIENT BADGE) */
+.vn-acb-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 2px 9px !important;
+  margin-left: 7px !important;
+  border-radius: 999px !important;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.2px !important;
+  cursor: pointer !important;
+  vertical-align: middle !important;
+  user-select: none !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  z-index: 999 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+
+.vn-acb-badge:hover {
+  transform: translateY(-1px) scale(1.03) !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.vn-acb-badge-red {
+  background: #fee2e2 !important;
+  color: #b91c1c !important;
+  border: 1px solid #f87171 !important;
+}
+
+.vn-acb-badge-yellow {
+  background: #fef3c7 !important;
+  color: #b45309 !important;
+  border: 1px solid #fbbf24 !important;
+}
+
+.vn-acb-badge-green {
+  background: #dcfce7 !important;
+  color: #15803d !important;
+  border: 1px solid #4ade80 !important;
+}
+
+/* 2. CHẾ ĐỘ LÀM MỜ TIN GIẬT TÍT (FOCUS BLUR MODE) */
+.vn-acb-blurred-title {
+  filter: blur(3.5px) !important;
+  opacity: 0.52 !important;
+  transition: filter 0.25s ease, opacity 0.25s ease !important;
+}
+
+.vn-acb-blurred-title:hover,
+.vn-acb-deblurred {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* 3. HOVER TOOLTIP CARD (HIỂN THỊ TÓM TẮT SAPO & TỪ KHÓA KHI RÊ CHUỘT) */
+.vn-acb-tooltip {
+  position: fixed !important;
+  width: 350px !important;
+  max-width: 92vw !important;
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  border: 1px solid #334155 !important;
+  border-radius: 14px !important;
+  padding: 14px 16px !important;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.45) !important;
+  z-index: 2147483646 !important;
+  pointer-events: auto !important;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease !important;
+}
+
+.vn-acb-tooltip.vn-acb-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.vn-acb-tt-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 8px !important;
+  padding-bottom: 8px !important;
+  border-bottom: 1px solid #1e293b !important;
+}
+
+.vn-acb-tt-title {
+  font-weight: 800 !important;
+  font-size: 13px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.vn-acb-tt-meter {
+  width: 100% !important;
+  height: 7px !important;
+  background: #1e293b !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+  margin: 6px 0 10px 0 !important;
+}
+
+.vn-acb-tt-meter-fill {
+  height: 100% !important;
+  border-radius: 999px !important;
+  transition: width 0.3s ease !important;
+}
+
+.vn-acb-tt-section {
+  background: #1e293b !important;
+  border-radius: 9px !important;
+  padding: 9px 11px !important;
+  margin-top: 8px !important;
+  font-size: 12.5px !important;
+  color: #e2e8f0 !important;
+}
+
+.vn-acb-tt-chip {
+  display: inline-block !important;
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(248, 113, 113, 0.4) !important;
+  padding: 1px 8px !important;
+  border-radius: 999px !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  margin: 2px 4px 2px 0 !important;
+}
+
+.vn-acb-tt-btn {
+  display: inline-block !important;
+  margin-top: 8px !important;
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 5px 11px !important;
+  border-radius: 7px !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+}
+
+.vn-acb-tt-btn:hover {
+  background: #1d4ed8 !important;
+}
+
+/* 4. TẦNG 2: READING ASSISTANT FLOATING PILL (KHI ĐỌC BÀI CHI TIẾT) */
+.vn-acb-reading-pill {
+  position: fixed !important;
+  right: 22px !important;
+  bottom: 22px !important;
+  width: 360px !important;
+  max-width: calc(100vw - 44px) !important;
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  border: 1px solid #334155 !important;
+  border-radius: 16px !important;
+  padding: 15px 18px !important;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.42) !important;
+  z-index: 2147483645 !important;
+  transition: all 0.25s ease !important;
+}
+
+.vn-acb-reading-pill.vn-acb-minimized {
+  width: auto !important;
+  padding: 9px 15px !important;
+  border-radius: 999px !important;
+  cursor: pointer !important;
+}
+
+.vn-acb-pill-actions {
+  display: flex !important;
+  gap: 8px !important;
+  margin-top: 10px !important;
+}
+
+.vn-acb-pill-btn {
+  flex: 1 !important;
+  padding: 7px 10px !important;
+  border-radius: 8px !important;
+  border: 1px solid #334155 !important;
+  background: #1e293b !important;
+  color: #f8fafc !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  transition: background 0.15s ease !important;
+}
+
+.vn-acb-pill-btn.vn-acb-primary {
+  background: #2563eb !important;
+  border-color: #3b82f6 !important;
+}
+
+.vn-acb-pill-btn:hover {
+  filter: brightness(1.12) !important;
+}

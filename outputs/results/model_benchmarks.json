@@ -1,0 +1,122 @@
+[
+  {
+    "group": "Baseline (ML)",
+    "model": "TF-IDF + Logistic Regression",
+    "input_type": "Title + Lead",
+    "accuracy": 0.8109161793372319,
+    "precision_clickbait": 0.6721311475409836,
+    "recall_clickbait": 0.76875,
+    "f1_clickbait": 0.717201166180758,
+    "f1_non_clickbait": 0.8579795021961932,
+    "macro_f1": 0.7875903341884756,
+    "roc_auc": 0.8634029745042492,
+    "train_time_sec": 0.0,
+    "infer_ms_per_sample": 0.0014941520455597898,
+    "confusion_matrix": [
+      [
+        293,
+        60
+      ],
+      [
+        37,
+        123
+      ]
+    ]
+  },
+  {
+    "group": "Baseline (ML)",
+    "model": "TF-IDF + Linear SVM",
+    "input_type": "Title + Lead",
+    "accuracy": 0.8128654970760234,
+    "precision_clickbait": 0.7077922077922078,
+    "recall_clickbait": 0.68125,
+    "f1_clickbait": 0.6942675159235668,
+    "f1_non_clickbait": 0.8651685393258427,
+    "macro_f1": 0.7797180276247048,
+    "roc_auc": 0.8582330028328612,
+    "train_time_sec": 0.0,
+    "infer_ms_per_sample": 0.008337231968814546,
+    "confusion_matrix": [
+      [
+        308,
+        45
+      ],
+      [
+        51,
+        109
+      ]
+    ]
+  },
+  {
+    "group": "Deep Learning",
+    "model": "BiLSTM (Bidirectional LSTM)",
+    "input_type": "Title + Lead",
+    "accuracy": 0.7719298245614035,
+    "precision_clickbait": 0.6113989637305699,
+    "recall_clickbait": 0.7375,
+    "f1_clickbait": 0.6685552407932012,
+    "f1_non_clickbait": 0.826151560178306,
+    "macro_f1": 0.7473534004857536,
+    "roc_auc": 0.8519298866855525,
+    "train_time_sec": 0.0,
+    "infer_ms_per_sample": 0.30775126705756756,
+    "confusion_matrix": [
+      [
+        278,
+        75
+      ],
+      [
+        42,
+        118
+      ]
+    ]
+  },
+  {
+    "group": "Deep Learning",
+    "model": "TextCNN (Multi-Filter 1D-CNN)",
+    "input_type": "Title + Lead",
+    "accuracy": 0.7855750487329435,
+    "precision_clickbait": 0.6453488372093024,
+    "recall_clickbait": 0.69375,
+    "f1_clickbait": 0.6686746987951807,
+    "f1_non_clickbait": 0.8414985590778098,
+    "macro_f1": 0.7550866289364953,
+    "roc_auc": 0.8415368271954674,
+    "train_time_sec": 0.0,
+    "infer_ms_per_sample": 0.2065372319675217,
+    "confusion_matrix": [
+      [
+        292,
+        61
+      ],
+      [
+        49,
+        111
+      ]
+    ]
+  },
+  {
+    "group": "Hybrid Ensemble (SOTA)",
+    "model": "Ensemble (Linear SVM + BiLSTM + TextCNN)",
+    "input_type": "Title + Lead",
+    "accuracy": 0.7953216374269005,
+    "precision_clickbait": 0.6536312849162011,
+    "recall_clickbait": 0.73125,
+    "f1_clickbait": 0.6902654867256637,
+    "f1_non_clickbait": 0.8471615720524017,
+    "macro_f1": 0.7687135293890327,
+    "roc_auc": 0.8641111898016998,
+    "train_time_sec": 0.0,
+    "infer_ms_per_sample": 0.523,
+    "confusion_matrix": [
+      [
+        291,
+        62
+      ],
+      [
+        43,
+        117
+      ]
+    ]
+  }
+]

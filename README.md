@@ -1,6 +1,6 @@
 # Phát hiện Clickbait Tiếng Việt (Vietnamese Clickbait Detection)
 
-Hệ thống phân loại văn bản nhị phân (**Binary Text Classification**) phát hiện bài báo tiếng Việt giật tít, câu view (`clickbait`) so với tin tức chính thống (`non-clickbait`), khai thác đặc trưng ngôn ngữ từ tiêu đề (`title`) và đoạn mở đầu/sapo (`lead_paragraph`).
+Hệ thống phân loại văn bản nhị phân (**Binary Text Classification**) phát hiện bài báo tiếng Việt giật tít, câu view (`clickbait`) so với tin tức chính thống (`non-clickbait`), khai thác đặc trưng ngôn ngữ từ tiêu đề (`title`) và đoạn mở đầu/sapo (`lead_paragraph`). Đi kèm **Web Demo Gradio (XAI)** và **Chrome Extension 3 Tầng (Manifest V3)** phục vụ trực tiếp độc giả đọc báo điện tử hàng ngày.
 
 ---
 
@@ -21,34 +21,55 @@ vi_clickbait_model/
 │   ├── models_ml.py                # Huấn luyện TF-IDF + Naive Bayes, Logistic Regression, Linear SVM, RF, XGBoost
 │   ├── models_dl.py                # Huấn luyện mô hình học sâu BiLSTM & TextCNN (1D-CNN)
 │   ├── models_bert.py              # Fine-tuning PhoBERT-base-v2 (Only Title & Title + Lead) + Error Analysis
-│   └── evaluate.py                 # Tính toán metrics và xuất toàn bộ biểu đồ EDA / Đánh giá
+│   ├── evaluate.py                 # Tính toán metrics và xuất toàn bộ biểu đồ EDA / Đánh giá
+│   └── inference.py                # Bộ máy suy diễn hợp nhất (Ensemble 5 mô hình, XAI, De-clickbait, URL Scraper)
+├── extension/                      # Chrome/Edge Extension (Manifest V3) — Giao diện 3 Tầng
+│   ├── manifest.json               # Cấu hình Extension Manifest V3
+│   ├── background.js               # Service Worker (Two-Tier Inference: Server Ensemble + Local ML Fallback)
+│   ├── content.js                  # Tầng 1 (In-Page Ambient Badges & Tooltip) + Tầng 2 (Reading Assistant Pill)
+│   ├── content.css                 # Stylesheet cô lập (.vn-acb-*) không xung đột với báo điện tử
+│   ├── popup.html / .js / .css     # Tầng 3 (Action Popup: Thống kê phút tiết kiệm, Độ sạch trang, Bộ lọc)
+│   ├── model_weights.json          # Trọng số n-gram xuất từ mô hình ML phục vụ suy diễn tức thì (<1ms)
+│   └── demo_news.html              # Cổng báo điện tử giả lập kiểm thử trực quan Extension
 ├── outputs/
-│   ├── figures/                    # Lưu trữ 9 bộ biểu đồ phân tích chất lượng cao (.png)
+│   ├── figures/                    # Lưu trữ bộ biểu đồ phân tích chất lượng cao (.png)
 │   └── results/                    # Lưu bảng điểm (CSV/Markdown/JSON) và model checkpoints
-├── run_pipeline.py                 # Script chạy tự động toàn bộ pipeline từ A đến Z
+├── app.py                          # Khởi chạy đồng thời Demo Gradio + FastAPI Server cho Extension
+├── run_pipeline.py                 # Script chạy tự động toàn bộ pipeline huấn luyện từ A đến Z
 ├── requirements.txt                # Danh sách thư viện phụ thuộc
-├── FINAL_REPORT.md                 # Báo cáo bài tập lớn hoàn chỉnh kèm số liệu thực nghiệm
 └── README.md                       # Tài liệu hướng dẫn cài đặt và sử dụng
 ```
 
 ---
 
-## 2. Hướng dẫn Cài đặt & Chạy Thực nghiệm
+## 2. Hướng dẫn Cài đặt & Chạy Demo Gradio + Chrome Extension
 
-### Cài đặt môi trường
+### Bước 1: Kích hoạt môi trường ảo & Cài đặt thư viện
 ```bash
+# Kích hoạt venv (Windows)
+venv\Scripts\activate
+
+# Cài đặt đầy đủ thư viện
 pip install -r requirements.txt
 ```
 
-### Chạy toàn bộ Pipeline từ A đến Z
+### Bước 2: Khởi chạy Web Demo Gradio & Backend API Server
 ```bash
-python run_pipeline.py
+python app.py
 ```
+Sau khi chạy lệnh trên, hệ thống mở các dịch vụ tại `http://127.0.0.1:7860`:
+- **Dashboard Demo Gradio & Giải thích AI (XAI)**: `http://127.0.0.1:7860`
+- **Trang Báo Điện Tử Giả Lập (Test Extension ngay trên trình duyệt)**: `http://127.0.0.1:7860/demo-news`
+- **REST API cho Chrome Extension**: `POST /api/predict`, `POST /api/predict_batch`, `POST /api/analyze_url`, `POST /api/feedback`
 
-Hoặc chạy riêng bước tiền xử lý dữ liệu:
-```bash
-python -m src.preprocess
-```
+### Bước 3: Cài đặt Chrome / Edge Extension (Manifest V3)
+1. Mở trình duyệt Chrome, Edge hoặc Brave và truy cập `chrome://extensions/`.
+2. Bật công tắc **Developer mode (Chế độ dành cho nhà phát triển)** ở góc trên bên phải.
+3. Nhấn nút **Load unpacked (Tải tiện ích đã giải nén)** và chọn thư mục `extension/` trong dự án này.
+4. Mở trang thử nghiệm `http://127.0.0.1:7860/demo-news` hoặc truy cập trực tiếp các báo lớn (`vnexpress.net`, `dantri.com.vn`, `tuoitre.vn`, `kenh14.vn`, `24h.com.vn`, `baomoi.com`) để trải nghiệm 3 tầng bảo vệ:
+   - **Tầng 1 (In-Page Ambient Badges)**: Gắn nhãn `🟢 Tin chuẩn`, `🟡 Chú ý`, `🔴 Giật tít` ngay cạnh tiêu đề; rê chuột vào nhãn để đọc **Tóm tắt Sapo** và **Tháo tít** mà không cần click vào bài câu view.
+   - **Tầng 2 (Reading Assistant Floating Pill)**: Thanh nổi ở góc dưới phải khi đọc bài chi tiết, cảnh báo độ lệch ngữ nghĩa giữa Tiêu đề và Sapo, hỗ trợ đổi tiêu đề bài viết sang văn phong trung lập.
+   - **Tầng 3 (Action Popup)**: Theo dõi số bài rác đã chặn, số phút tiết kiệm được, bật/tắt chế độ **Tự động làm mờ (Blur) tin câu view** và điều chỉnh độ nhạy bộ lọc.
 
 ---
 
@@ -59,6 +80,5 @@ python -m src.preprocess
    - Cắt bỏ hậu tố tên báo ở cuối `title` của **Báo Mới** (`716 mẫu`, ví dụ: `"... - Tạp chí SaoStar"`).
 2. **Chống Rò rỉ Dữ liệu & Học vẹt (Anti-Shortcut Learning)**:
    - Loại bỏ hoàn toàn cột `source` khỏi tập đặc trưng huấn luyện để buộc mô hình học ngữ nghĩa văn bản thay vì học vẹt tên báo.
-3. **So sánh Đa chiều (Ablation Study)**:
-   - So sánh 3 thế hệ mô hình: **Học máy truyền thống (`TF-IDF + NB / LR / Linear SVM / RF / XGBoost`)** vs **Học sâu (`BiLSTM`, `TextCNN`)** vs **Pre-trained Transformer (`vinai/phobert-base-v2`)**.
-   - So sánh 2 phương án đầu vào: **Option A (`Only Title`)** vs **Option B (`Title + [SEP] + Lead Paragraph`)**.
+3. **Suy diễn 2 Tầng (Two-Tier Inference) cho Extension**:
+   - Kết hợp **Local ML Engine** (`model_weights.json` chạy trực tiếp trên trình duyệt trong `<1ms` khi offline) và **Server Hybrid Ensemble** (`Linear SVM + Logistic Regression + BiLSTM + TextCNN` qua FastAPI).

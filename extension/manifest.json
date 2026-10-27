@@ -1,0 +1,66 @@
+{
+  "manifest_version": 3,
+  "name": "VN Anti-Clickbait Shield — Lá chắn Tin Giật Tít",
+  "short_name": "Anti-Clickbait VN",
+  "version": "1.0.0",
+  "description": "Tự động nhận diện, gắn nhãn cảnh báo (Xanh/Vàng/Đỏ), làm mờ tin giật tít câu view và tóm tắt nhanh nội dung thật trên báo điện tử Việt Nam.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "VN Anti-Clickbait Shield — Bảng điều khiển",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.vnexpress.net/*",
+        "*://*.kenh14.vn/*",
+        "*://*.24h.com.vn/*",
+        "*://*.baomoi.com/*",
+        "*://*.tuoitre.vn/*",
+        "*://*.thanhnien.vn/*",
+        "*://*.vietnamnet.vn/*",
+        "*://*.saostar.vn/*",
+        "*://*.dantri.com.vn/*",
+        "*://*.cafef.vn/*",
+        "*://*.znews.vn/*",
+        "*://*.soha.vn/*",
+        "*://*.vtcnews.vn/*",
+        "http://127.0.0.1:7860/demo-news*",
+        "http://localhost:7860/demo-news*",
+        "file:///*demo_news.html*"
+      ],
+      "css": ["content.css"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "model_weights.json",
+        "icons/*.png"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

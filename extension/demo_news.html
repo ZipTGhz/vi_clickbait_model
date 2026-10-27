@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Báo Điện Tử Việt Nam 24/7 — Trang Thử Nghiệm VN Anti-Clickbait Extension</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #f1f5f9;
+      color: #0f172a;
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      line-height: 1.55;
+    }
+    .topbar {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-badge {
+      background: #dc2626;
+      color: #fff;
+      font-weight: 900;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+    }
+    .topbar-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+    .ctrl-pill {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 6px 12px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+    .container {
+      max-width: 1120px;
+      margin: 22px auto;
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 22px;
+    }
+    @media (max-width: 860px) {
+      .container { grid-template-columns: 1fr; }
+    }
+    .guide-banner {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+      color: #fff;
+      padding: 16px 22px;
+      border-radius: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(30, 58, 138, 0.2);
+    }
+    .news-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      transition: box-shadow 0.2s ease, transform 0.15s ease;
+    }
+    .news-card:hover {
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.07);
+    }
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .cat-tag {
+      background: #f1f5f9;
+      color: #334155;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-weight: 700;
+    }
+    h2.title-news, h3.title-news {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    h2.title-news a, h3.title-news a {
+      color: #0f172a;
+      text-decoration: none;
+    }
+    h2.title-news a:hover, h3.title-news a:hover {
+      color: #1d4ed8;
+    }
+    p.description {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.55;
+    }
+    /* KHUNG ĐỌC BÀI CHI TIẾT (TẦNG 2) */
+    .detail-box {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 20px;
+      position: sticky;
+      top: 72px;
+      height: fit-content;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    .detail-badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    h1.title-detail {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.38;
+      margin-bottom: 10px;
+    }
+    .detail-sapo {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #334155;
+      background: #f8fafc;
+      padding: 12px 14px;
+      border-left: 4px solid #3b82f6;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+    .detail-body {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-brand">
+      <span class="logo-badge">TIN VIỆT 24/7</span>
+      <span style="font-size:13.5px;color:#cbd5e1;">Cổng thông tin giả lập kiểm thử Chrome Extension Chống Clickbait</span>
+    </div>
+    <div class="topbar-controls">
+      <label class="ctrl-pill" id="fallback-blur-Wrap" style="display:none;">
+        <input type="checkbox" id="fallback-blur-toggle" />
+        <span>🙈 Tự động làm mờ (Blur) tít câu view</span>
+      </label>
+      <a href="/" style="color:#38bdf8;text-decoration:none;font-weight:700;">← Quay lại Gradio Hub</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="guide-banner">
+      <div>
+        <div style="font-weight:800;font-size:16px;margin-bottom:3px;">
+          🛡️ Trải nghiệm Thực tế Giao diện 3 Tầng của VN Anti-Clickbait Shield
+        </div>
+        <div style="font-size:13px;color:#cbd5e1;">
+          • <b>Tầng 1:</b> Rê chuột vào các nhãn <b>🟢 Tin chuẩn / 🟡 Chú ý / 🔴 Giật tít</b> cạnh tiêu đề để xem <i>Từ khóa báo động</i>, <i>Tóm tắt Sapo</i> và nút <i>Tháo tít</i>.<br>
+          • <b>Tầng 2:</b> Nhấp vào bất kỳ tiêu đề bài báo nào bên trái để mở khung Đọc Bài Chi Tiết và kích hoạt <b>Thanh Trợ Lý Đọc Báo (Floating Pill)</b> ở góc dưới màn hình.
+        </div>
+      </div>
+      <div id="ext-detect-badge" style="background:rgba(34,197,94,0.2);border:1px solid #4ade80;color:#86efac;padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:700;">
+        ⚡ Đang kích hoạt AI Scanner...
+      </div>
+    </div>
+
+    <!-- CỘT TRÁI: DANH SÁCH TIN TỨC (TẦNG 1 IN-PAGE AMBIENT BADGES) -->
+    <section id="news-feed-column">
+      <article class="item-news news-card" data-acb-article="1">
+        <div class="meta-row"><span class="cat-tag">Giải trí · Showbiz</span><span>· 10 phút trước · SaoStar</span></div>
+        <h3 class="title-news">
+          <a href="#read-1" class="article-link" data-idx="0">
+            Hé lộ danh tính người đàn ông bí ẩn xuất hiện cùng nữ diễn viên lúc nửa đêm khiến MXH xôn xao!
+          </a>
+        </h3>
+        <p class="description">
+          Tối 25/10, đoàn làm phim xác nhận người đi cùng nữ diễn viên tại sân bay Tân Sơn Nhất là trợ lý sản xuất hỗ trợ lịch trình quay quảng cáo.
+        </p>
+      </article>
+
+      <article class="item-news news-card" data-acb-article="2">
+        <div class="meta-row"><span class="cat-tag">Kinh tế · Tài chính</span><span>· 25 phút trước · VnExpress</span></div>
+        <h3 class="title-news">
+          <a href="#read-2" class="article-link" data-idx="1">
+            Ngân hàng Nhà nước giữ nguyên lãi suất điều hành nhằm ổn định thị trường tiền tệ quý IV
+          </a>
+        </h3>
+        <p class="description">
+          Ngày 26/10, Ngân hàng Nhà nước Việt Nam công bố báo cáo điều hành chính sách tiền tệ, tiếp tục duy trì mặt bằng lãi suất hỗ trợ doanh nghiệp phục hồi sản xuất.
+        </p>
+      </article>
+
+      <article class="item-news news-card" data-acb-article="3">
+        <div class="meta-row"><span class="cat-tag">Sức khỏe · Đời sống</span><span>· 40 phút trước · Kênh14</span></div>
+        <h3 class="title-news">
+          <a href="#read-3" class="article-link" data-idx="2">
+            Chỉ vì một thói quen vào buổi sáng mà 90% người Việt mắc phải, người đàn ông 35 tuổi nhận cái kết đắng!
+          </a>
+        </h3>
+        <p class="description">
+          Các bác sĩ Bệnh viện Bạch Mai vừa tiếp nhận một bệnh nhân nam 35 tuổi nhập viện do viêm loét dạ dày cấp tính vì thường xuyên bỏ bữa sáng và uống cà phê đặc khi bụng đói.
+        </p>
+      </article>
+
+      <article class="item-news news-card" data-acb-article="4">
+        <div class="meta-row"><span class="cat-tag">Giao thông · Đô thị</span><span>· 1 giờ trước · Tuổi Trẻ</span></div>
+        <h3 class="title-news">
+          <a href="#read-4" class="article-link" data-idx="3">
+            Cảng hàng không Vinh tạm dừng khai thác từ ngày 1/7 để nâng cấp đường băng và nhà ga
+          </a>
+        </h3>
+        <p class="description">
+          Cảng hàng không quốc tế Vinh sẽ đóng cửa tạm thời trong 6 tháng nhằm sửa chữa đường cất hạ cánh và mở rộng sân đỗ tàu bay theo quy hoạch của Bộ Giao thông Vận tải.
+        </p>
+      </article>
+
+      <article class="item-news news-card" data-acb-article="5">
+        <div class="meta-row"><span class="cat-tag">Đời sống · Khám phá</span><span>· 2 giờ trước · 24h</span></div>
+        <h3 class="title-news">
+          <a href="#read-5" class="article-link" data-idx="4">
+            Bất ngờ với thứ quả mọc dại đầy ở quê Việt Nam nhưng được bán giá tiền triệu tại nước ngoài, biết công dụng ai cũng ngỡ ngàng
+          </a>
+        </h3>
+        <p class="description">
+          Quả tầm bóp (hay còn gọi là thù lù) từng mọc hoang ở nhiều vùng nông thôn Việt Nam hiện được xuất khẩu sang thị trường Nhật Bản và châu Âu nhờ giàu vitamin C.
+        </p>
+      </article>
+
+      <article class="item-news news-card" data-acb-article="6">
+        <div class="meta-row"><span class="cat-tag">Công nghệ · Số hóa</span><span>· 3 giờ trước · Thanh Niên</span></div>
+        <h3 class="title-news">
+          <a href="#read-6" class="article-link" data-idx="5">
+            Bộ Thông tin và Truyền thông công bố chiến lược phát triển hạ tầng dữ liệu số quốc gia đến năm 2030
+          </a>
+        </h3>
+        <p class="description">
+          Chiến lược đặt mục tiêu hoàn thiện các trung tâm dữ liệu xanh đạt chuẩn quốc tế, thúc đẩy ứng dụng trí tuệ nhân tạo trong dịch vụ công trực tuyến.
+        </p>
+      </article>
+    </section>
+
+    <!-- CỘT PHẢI: KHUNG ĐỌC BÀI CHI TIẾT (TẦNG 2 READING ASSISTANT) -->
+    <aside>
+      <div class="detail-box">
+        <span class="detail-badge">📖 CHẾ ĐỘ ĐỌC BÀI CHI TIẾT (TẦNG 2)</span>
+        <h1 class="title-detail" data-acb-detail-title id="detail-h1">
+          Hé lộ danh tính người đàn ông bí ẩn xuất hiện cùng nữ diễn viên lúc nửa đêm khiến MXH xôn xao!
+        </h1>
+        <p class="description detail-sapo" data-acb-detail-sapo id="detail-sapo">
+          Tối 25/10, đoàn làm phim xác nhận người đi cùng nữ diễn viên tại sân bay Tân Sơn Nhất là trợ lý sản xuất hỗ trợ lịch trình quay quảng cáo.
+        </p>
+        <div class="detail-body" id="detail-body">
+          <p style="margin-bottom:10px;">
+            Nhấp vào bất kỳ tiêu đề bài báo nào ở cột bên trái để chuyển bài đọc. Thanh <b>Trợ lý Đọc Báo (Floating Pill)</b> ở góc dưới bên phải màn hình sẽ tự động phân tích độ lệch ngữ nghĩa giữa <b>Tiêu đề</b> và <b>Sapo</b> của bài đang đọc.
+          </p>
+          <p>
+            Nếu bài báo có dấu hiệu giật tít câu view, bạn có thể nhấn nút <b>“✨ Tháo tít trên bài”</b> ở góc phải dưới để đổi tiêu đề giật gân phía trên thành tiêu đề trung lập chuẩn báo chí!
+          </p>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Nếu người dùng mở trang này trực tiếp từ Gradio mà chưa cài Extension vào Chrome,
+       tự động nạp CSS & mô phỏng Content Script kết nối tới /api/predict_batch để trải nghiệm 100% tính năng! -->
+  <link rel="stylesheet" href="content.css" />
+  <script>
+    const ARTICLES_DATA = Array.from(document.querySelectorAll(".news-card")).map((card, idx) => ({
+      idx,
+      title: card.querySelector(".title-news a").textContent.trim(),
+      sapo: card.querySelector(".description").textContent.trim()
+    }));
+
+    document.querySelectorAll(".article-link").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const idx = Number(link.dataset.idx || 0);
+        const item = ARTICLES_DATA[idx];
+        if (!item) return;
+        document.getElementById("detail-h1").textContent = item.title;
+        document.getElementById("detail-sapo").textContent = item.sapo;
+        window.dispatchEvent(new CustomEvent("vn-acb-rescan"));
+        if (window.__runFallbackDetailAssistant) {
+          window.__runFallbackDetailAssistant(item.title, item.sapo);
+        }
+      });
+    });
+
+    // Kiểm tra sau 400ms: nếu Chrome Extension đã được cài đặt thì để Extension xử lý;
+    // nếu chưa cài Extension thì chạy chế độ Live Web Preview gọi thẳng /api/predict_batch của server!
+    setTimeout(async () => {
+      const badgeEl = document.getElementById("ext-detect-badge");
+      if (window.__VN_ACB_INITIALIZED__) {
+        badgeEl.textContent = "✓ Chrome Extension Đã Kích Hoạt Trực Tiếp";
+        return;
+      }
+
+      badgeEl.textContent = "🌐 Chế độ Web Live Preview (Kết nối trực tiếp AI Server)";
+      const blurWrap = document.getElementById("fallback-blur-Wrap");
+      const blurToggle = document.getElementById("fallback-blur-toggle");
+      blurWrap.style.display = "flex";
+
+      let predictionsMap = {};
+      try {
+        const resp = await fetch("/api/predict_batch", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: ARTICLES_DATA.map(a => ({ id: String(a.idx), title: a.title, lead_paragraph: a.sapo })),
+            sensitivity: 0.50
+          })
+        });
+        const data = await resp.json();
+        (data.results || []).forEach(r => { predictionsMap[r.id] = r; });
+      } catch (err) {
+        console.warn("Không gọi được /api/predict_batch:", err);
+        return;
+      }
+
+      // Render Badges & Hover Tooltip giống hệt content.js
+      let tt = document.createElement("div");
+      tt.className = "vn-acb-tooltip";
+      tt.style.display = "none";
+      document.body.appendChild(tt);
+      let hideTimer = null;
+
+      tt.addEventListener("mouseenter", () => clearTimeout(hideTimer));
+      tt.addEventListener("mouseleave", () => {
+        tt.classList.remove("vn-acb-visible");
+        setTimeout(() => { tt.style.display = "none"; }, 180);
+      });
+
+      function applyAnnotations() {
+        document.querySelectorAll(".vn-acb-badge").forEach(b => b.remove());
+        document.querySelectorAll(".article-link").forEach((link) => {
+          const id = link.dataset.idx;
+          const pred = predictionsMap[id];
+          if (!pred) return;
+
+          if (blurToggle.checked && pred.is_clickbait) {
+            link.classList.add("vn-acb-blurred-title");
+          } else {
+            link.classList.remove("vn-acb-blurred-title");
+          }
+
+          const badge = document.createElement("span");
+          const dot = pred.badge_level === "red" ? "🔴" : pred.badge_level === "yellow" ? "🟡" : "🟢";
+          badge.className = `vn-acb-badge vn-acb-badge-${pred.badge_level}`;
+          badge.innerHTML = `<span>${dot}</span><span>${pred.badge_text}</span>`;
+
+          badge.addEventListener("mouseenter", () => {
+            clearTimeout(hideTimer);
+            const pct = Math.round(pred.prob_clickbait * 100);
+            const barColor = pred.badge_level === "red" ? "#ef4444" : pred.badge_level === "yellow" ? "#f59e0b" : "#22c55e";
+            const chips = (pred.trigger_words || []).map(t => `<span class="vn-acb-tt-chip">⚡ ${t.word}</span>`).join("") || "<span style='color:#94a3b8;font-size:12px;'>Không có từ khóa kích động</span>";
+            const reasons = (pred.reasons_vi || []).map(r => `<div style="margin-bottom:3px;">• ${r}</div>`).join("");
+
+            tt.innerHTML = `
+              <div class="vn-acb-tt-header">
+                <div class="vn-acb-tt-title"><span>${dot}</span><span>${pred.verdict_vi}</span></div>
+                <span style="font-weight:800;color:${barColor};">${pct}%</span>
+              </div>
+              <div class="vn-acb-tt-meter"><div class="vn-acb-tt-meter-fill" style="width:${Math.max(pct, 4)}%;background:${barColor};"></div></div>
+              <div style="font-size:12px;color:#cbd5e1;margin-bottom:6px;">${reasons}</div>
+              <div>${chips}</div>
+              <div class="vn-acb-tt-section">
+                <div style="font-weight:700;color:#38bdf8;font-size:11.5px;margin-bottom:2px;">💡 Tóm tắt nội dung thật (Sapo):</div>
+                <div>${pred.quick_summary}</div>
+              </div>
+              ${pred.is_clickbait ? `<button class="vn-acb-tt-btn" id="preview-declick-btn">✨ Tháo tít ngay trên trang</button>` : ""}
+            `;
+            tt.style.display = "block";
+            const rect = badge.getBoundingClientRect();
+            tt.style.left = `${Math.min(rect.left, window.innerWidth - 366)}px`;
+            tt.style.top = `${rect.bottom + 8}px`;
+            requestAnimationFrame(() => tt.classList.add("vn-acb-visible"));
+
+            const dBtn = tt.querySelector("#preview-declick-btn");
+            if (dBtn) {
+              dBtn.onclick = () => {
+                link.textContent = `✨ ${pred.declickbait_title}`;
+                link.classList.remove("vn-acb-blurred-title");
+                dBtn.textContent = "✓ Đã đổi sang tít trung lập";
+              };
+            }
+          });
+
+          badge.addEventListener("mouseleave", () => {
+            hideTimer = setTimeout(() => {
+              tt.classList.remove("vn-acb-visible");
+              setTimeout(() => { tt.style.display = "none"; }, 180);
+            }, 200);
+          });
+
+          link.insertAdjacentElement("afterend", badge);
+        });
+      }
+
+      blurToggle.addEventListener("change", applyAnnotations);
+      applyAnnotations();
+
+      // Render Tầng 2 Floating Pill ở góc phải dưới
+      let pill = null;
+      window.__runFallbackDetailAssistant = async (title, sapo) => {
+        if (pill) pill.remove();
+        const resp = await fetch("/api/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title, lead_paragraph: sapo })
+        });
+        const pred = await resp.json();
+        pill = document.createElement("div");
+        pill.className = "vn-acb-reading-pill";
+        const dot = pred.badge_level === "red" ? "🔴" : pred.badge_level === "yellow" ? "🟡" : "🟢";
+        const accent = pred.badge_level === "red" ? "#f87171" : pred.badge_level === "yellow" ? "#fbbf24" : "#4ade80";
+        let swapped = false;
+
+        pill.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <div style="font-weight:800;font-size:13px;">🛡️ Trợ lý Đọc Báo <span style="color:${accent};">· ${dot} ${pred.badge_text}</span></div>
+          </div>
+          <div style="font-size:12px;color:#cbd5e1;margin-bottom:8px;">${(pred.reasons_vi && pred.reasons_vi[0]) || ""}</div>
+          ${pred.is_clickbait ? `<div style="background:#1e293b;padding:8px 10px;border-radius:8px;border-left:3px solid #38bdf8;font-size:12px;margin-bottom:8px;"><div style="color:#38bdf8;font-weight:700;font-size:11px;">✨ Tiêu đề trung lập sát nội dung:</div><div style="color:#f8fafc;font-weight:600;margin-top:2px;">“${pred.declickbait_title}”</div></div>` : ""}
+          <div class="vn-acb-pill-actions">
+            ${pred.is_clickbait ? `<button class="vn-acb-pill-btn vn-acb-primary" id="fb-pill-swap">✨ Tháo tít trên bài</button>` : ""}
+            <button class="vn-acb-pill-btn" id="fb-pill-report">🚩 Báo nhầm lẫn</button>
+          </div>
+        `;
+        document.body.appendChild(pill);
+
+        const swapBtn = pill.querySelector("#fb-pill-swap");
+        if (swapBtn) {
+          swapBtn.onclick = () => {
+            const h1 = document.getElementById("detail-h1");
+            if (!swapped) {
+              h1.textContent = pred.declickbait_title;
+              swapBtn.textContent = "↩ Khôi phục tít gốc";
+              swapped = true;
+            } else {
+              h1.textContent = title;
+              swapBtn.textContent = "✨ Tháo tít trên bài";
+              swapped = false;
+            }
+          };
+        }
+        const repBtn = pill.querySelector("#fb-pill-report");
+        if (repBtn) {
+          repBtn.onclick = () => { repBtn.textContent = "✓ Cảm ơn phản hồi!"; };
+        }
+      };
+
+      window.__runFallbackDetailAssistant(ARTICLES_DATA[0].title, ARTICLES_DATA[0].sapo);
+    }, 400);
+  </script>
+</body>
+</html>
