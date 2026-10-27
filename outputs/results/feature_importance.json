@@ -1,0 +1,436 @@
+{
+  "logistic_regression": {
+    "top_20_clickbait_ngrams": [
+      {
+        "feature": "bất_ngờ",
+        "weight": 2.7244579639826125
+      },
+      {
+        "feature": "khiến",
+        "weight": 2.175871398592479
+      },
+      {
+        "feature": "gây",
+        "weight": 1.8355335703589688
+      },
+      {
+        "feature": "là",
+        "weight": 1.683039336051447
+      },
+      {
+        "feature": "tiết_lộ",
+        "weight": 1.5693197835997135
+      },
+      {
+        "feature": "cũng",
+        "weight": 1.512688836049285
+      },
+      {
+        "feature": "bạn",
+        "weight": 1.484028748230205
+      },
+      {
+        "feature": "thế_giới",
+        "weight": 1.431008193266276
+      },
+      {
+        "feature": "mạng",
+        "weight": 1.4146641518217833
+      },
+      {
+        "feature": "con",
+        "weight": 1.3938828868590862
+      },
+      {
+        "feature": "của",
+        "weight": 1.3662844824605078
+      },
+      {
+        "feature": "đời_sống",
+        "weight": 1.316996320221701
+      },
+      {
+        "feature": "phim",
+        "weight": 1.2581183162940195
+      },
+      {
+        "feature": "bí_mật",
+        "weight": 1.2566256479871531
+      },
+      {
+        "feature": "chưa",
+        "weight": 1.2517560168733626
+      },
+      {
+        "feature": "tiền",
+        "weight": 1.1919237386189931
+      },
+      {
+        "feature": "này",
+        "weight": 1.188878540532626
+      },
+      {
+        "feature": "chưa từng",
+        "weight": 1.177669278059462
+      },
+      {
+        "feature": "bí_quyết",
+        "weight": 1.172807176915764
+      },
+      {
+        "feature": "làm",
+        "weight": 1.1543192097092447
+      }
+    ],
+    "top_20_non_clickbait_ngrams": [
+      {
+        "feature": "báo_chí",
+        "weight": -1.1983061366414727
+      },
+      {
+        "feature": "đà_nẵng",
+        "weight": -1.1254191118006378
+      },
+      {
+        "feature": "việt_nam",
+        "weight": -1.111660970649289
+      },
+      {
+        "feature": "nguy_kịch",
+        "weight": -1.0761224055014593
+      },
+      {
+        "feature": "tp",
+        "weight": -1.0254441472780822
+      },
+      {
+        "feature": "theo",
+        "weight": -0.9744460398062854
+      },
+      {
+        "feature": "vụ",
+        "weight": -0.9631753372507789
+      },
+      {
+        "feature": "từ",
+        "weight": -0.961728794000504
+      },
+      {
+        "feature": "6",
+        "weight": -0.873834719997487
+      },
+      {
+        "feature": "tỉnh",
+        "weight": -0.8719400283180813
+      },
+      {
+        "feature": "tổ_chức",
+        "weight": -0.871725864228406
+      },
+      {
+        "feature": "thủ_tướng",
+        "weight": -0.8627081905076319
+      },
+      {
+        "feature": "trong",
+        "weight": -0.8596139771651689
+      },
+      {
+        "feature": "mưa",
+        "weight": -0.8296254415612182
+      },
+      {
+        "feature": "tai_nạn",
+        "weight": -0.8242828649232574
+      },
+      {
+        "feature": "phát_triển",
+        "weight": -0.8007178881515278
+      },
+      {
+        "feature": "mới nhất",
+        "weight": -0.7925932201893408
+      },
+      {
+        "feature": "mỹ",
+        "weight": -0.7784684733565954
+      },
+      {
+        "feature": "tại",
+        "weight": -0.7715019582364401
+      },
+      {
+        "feature": "2025",
+        "weight": -0.7533500380443098
+      }
+    ],
+    "top_25_including_handcrafted": [
+      {
+        "feature": "bất_ngờ",
+        "weight": 2.7244579639826125
+      },
+      {
+        "feature": "khiến",
+        "weight": 2.175871398592479
+      },
+      {
+        "feature": "[HC]_has_question",
+        "weight": 2.156076482699722
+      },
+      {
+        "feature": "gây",
+        "weight": 1.8355335703589688
+      },
+      {
+        "feature": "là",
+        "weight": 1.683039336051447
+      },
+      {
+        "feature": "[HC]_has_ellipsis",
+        "weight": 1.6795508889158834
+      },
+      {
+        "feature": "tiết_lộ",
+        "weight": 1.5693197835997135
+      },
+      {
+        "feature": "[HC]_has_quotes",
+        "weight": 1.5224110786564093
+      },
+      {
+        "feature": "cũng",
+        "weight": 1.512688836049285
+      },
+      {
+        "feature": "[HC]_has_exclamation",
+        "weight": 1.495996573914611
+      },
+      {
+        "feature": "bạn",
+        "weight": 1.484028748230205
+      },
+      {
+        "feature": "thế_giới",
+        "weight": 1.431008193266276
+      },
+      {
+        "feature": "mạng",
+        "weight": 1.4146641518217833
+      },
+      {
+        "feature": "con",
+        "weight": 1.3938828868590862
+      },
+      {
+        "feature": "của",
+        "weight": 1.3662844824605078
+      },
+      {
+        "feature": "đời_sống",
+        "weight": 1.316996320221701
+      },
+      {
+        "feature": "phim",
+        "weight": 1.2581183162940195
+      },
+      {
+        "feature": "bí_mật",
+        "weight": 1.2566256479871531
+      },
+      {
+        "feature": "chưa",
+        "weight": 1.2517560168733626
+      },
+      {
+        "feature": "tiền",
+        "weight": 1.1919237386189931
+      },
+      {
+        "feature": "này",
+        "weight": 1.188878540532626
+      },
+      {
+        "feature": "chưa từng",
+        "weight": 1.177669278059462
+      },
+      {
+        "feature": "bí_quyết",
+        "weight": 1.172807176915764
+      },
+      {
+        "feature": "làm",
+        "weight": 1.1543192097092447
+      },
+      {
+        "feature": "nhất",
+        "weight": 1.1479404131865656
+      }
+    ]
+  },
+  "linear_svm": {
+    "top_20_clickbait_ngrams": [
+      {
+        "feature": "bất_ngờ",
+        "weight": 1.4438396610502082
+      },
+      {
+        "feature": "khiến",
+        "weight": 1.1383561939108826
+      },
+      {
+        "feature": "gây",
+        "weight": 0.8424534317561687
+      },
+      {
+        "feature": "bạn",
+        "weight": 0.8136742438214718
+      },
+      {
+        "feature": "tiết_lộ",
+        "weight": 0.7844381961873209
+      },
+      {
+        "feature": "cũng",
+        "weight": 0.7835093081259483
+      },
+      {
+        "feature": "mạng",
+        "weight": 0.7674652651204195
+      },
+      {
+        "feature": "là",
+        "weight": 0.7620985751424486
+      },
+      {
+        "feature": "đời_sống",
+        "weight": 0.7149059306092725
+      },
+      {
+        "feature": "con",
+        "weight": 0.7141376330742143
+      },
+      {
+        "feature": "chưa từng",
+        "weight": 0.7050586306489549
+      },
+      {
+        "feature": "thế_giới",
+        "weight": 0.6950698290934204
+      },
+      {
+        "feature": "của",
+        "weight": 0.6803224094418364
+      },
+      {
+        "feature": "bí_quyết",
+        "weight": 0.6780968704651154
+      },
+      {
+        "feature": "bí_mật",
+        "weight": 0.6641238481673373
+      },
+      {
+        "feature": "mẹo",
+        "weight": 0.6536936873946126
+      },
+      {
+        "feature": "từng có",
+        "weight": 0.6464228732109529
+      },
+      {
+        "feature": "chưa",
+        "weight": 0.6323447297368014
+      },
+      {
+        "feature": "game",
+        "weight": 0.59436799759557
+      },
+      {
+        "feature": "phim",
+        "weight": 0.5912537241662239
+      }
+    ],
+    "top_20_non_clickbait_ngrams": [
+      {
+        "feature": "nguy_kịch",
+        "weight": -0.6616492437966317
+      },
+      {
+        "feature": "báo_chí",
+        "weight": -0.5645785329092149
+      },
+      {
+        "feature": "đà_nẵng",
+        "weight": -0.5486220988342482
+      },
+      {
+        "feature": "trong",
+        "weight": -0.5272390307813055
+      },
+      {
+        "feature": "mưa",
+        "weight": -0.5113997783228038
+      },
+      {
+        "feature": "tai_nạn",
+        "weight": -0.5108488229893263
+      },
+      {
+        "feature": "theo",
+        "weight": -0.5093511157362798
+      },
+      {
+        "feature": "việt_nam",
+        "weight": -0.4993724570827867
+      },
+      {
+        "feature": "tài",
+        "weight": -0.49164621637853567
+      },
+      {
+        "feature": "tp",
+        "weight": -0.49052127271641827
+      },
+      {
+        "feature": "khi trẻ",
+        "weight": -0.47381960850976074
+      },
+      {
+        "feature": "gây tai_nạn",
+        "weight": -0.47042887740842654
+      },
+      {
+        "feature": "từ",
+        "weight": -0.46342821030267817
+      },
+      {
+        "feature": "smartphone",
+        "weight": -0.45293918717571274
+      },
+      {
+        "feature": "khả_năng",
+        "weight": -0.45266505643105814
+      },
+      {
+        "feature": "trực_tiếp",
+        "weight": -0.4505864771576106
+      },
+      {
+        "feature": "thêm",
+        "weight": -0.4437003385392512
+      },
+      {
+        "feature": "hybrid",
+        "weight": -0.4348269786359076
+      },
+      {
+        "feature": "vụ",
+        "weight": -0.43204804910569194
+      },
+      {
+        "feature": "thắng",
+        "weight": -0.430931250201062
+      }
+    ]
+  }
+}

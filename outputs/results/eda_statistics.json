@@ -1,0 +1,197 @@
+{
+  "label_counts": {
+    "non-clickbait": 2349,
+    "clickbait": 1065
+  },
+  "source_vs_label": {
+    "clickbait": {
+      "24h": 248,
+      "Báo Mới": 148,
+      "Kênh14": 40,
+      "SaoStar": 186,
+      "Thanh Niên": 172,
+      "Tuổi Trẻ": 70,
+      "VietNamNet": 113,
+      "VnExpress": 88
+    },
+    "non-clickbait": {
+      "24h": 316,
+      "Báo Mới": 583,
+      "Kênh14": 12,
+      "SaoStar": 100,
+      "Thanh Niên": 404,
+      "Tuổi Trẻ": 171,
+      "VietNamNet": 243,
+      "VnExpress": 520
+    }
+  },
+  "source_clickbait_pct": {
+    "VnExpress": 14.47,
+    "Báo Mới": 20.25,
+    "Tuổi Trẻ": 29.05,
+    "Thanh Niên": 29.86,
+    "VietNamNet": 31.74,
+    "24h": 43.97,
+    "SaoStar": 65.03,
+    "Kênh14": 76.92
+  },
+  "category_vs_label": {
+    "clickbait": {
+      "Chính trị & An ninh": 29,
+      "Công nghệ & Khoa học": 78,
+      "Du lịch & Ẩm thực": 47,
+      "Giáo dục & Học đường": 37,
+      "Giải trí & Showbiz": 168,
+      "Kinh doanh & Kinh tế": 64,
+      "Other": 300,
+      "Quốc tế": 60,
+      "Sức khỏe & Đời sống": 130,
+      "Thể thao": 84,
+      "Tin tức tổng hợp": 8,
+      "Văn hóa & Nghệ thuật": 10,
+      "Xe & Vận tải": 50
+    },
+    "non-clickbait": {
+      "Chính trị & An ninh": 144,
+      "Công nghệ & Khoa học": 142,
+      "Du lịch & Ẩm thực": 62,
+      "Giáo dục & Học đường": 123,
+      "Giải trí & Showbiz": 70,
+      "Kinh doanh & Kinh tế": 140,
+      "Other": 817,
+      "Quốc tế": 181,
+      "Sức khỏe & Đời sống": 98,
+      "Thể thao": 241,
+      "Tin tức tổng hợp": 189,
+      "Văn hóa & Nghệ thuật": 55,
+      "Xe & Vận tải": 87
+    }
+  },
+  "category_clickbait_pct": {
+    "Tin tức tổng hợp": 4.06,
+    "Văn hóa & Nghệ thuật": 15.38,
+    "Chính trị & An ninh": 16.76,
+    "Giáo dục & Học đường": 23.12,
+    "Quốc tế": 24.9,
+    "Thể thao": 25.85,
+    "Other": 26.86,
+    "Kinh doanh & Kinh tế": 31.37,
+    "Công nghệ & Khoa học": 35.45,
+    "Xe & Vận tải": 36.5,
+    "Du lịch & Ẩm thực": 43.12,
+    "Sức khỏe & Đời sống": 57.02,
+    "Giải trí & Showbiz": 70.59
+  },
+  "length_stats": {
+    "title_word_count_mean": {
+      "clickbait": 13.98,
+      "non-clickbait": 13.68
+    },
+    "title_word_count_std": {
+      "clickbait": 4.44,
+      "non-clickbait": 3.64
+    },
+    "title_word_count_median": {
+      "clickbait": 14.0,
+      "non-clickbait": 14.0
+    },
+    "title_char_len_mean": {
+      "clickbait": 62.27,
+      "non-clickbait": 61.41
+    },
+    "title_char_len_std": {
+      "clickbait": 20.09,
+      "non-clickbait": 16.3
+    },
+    "title_char_len_median": {
+      "clickbait": 62.0,
+      "non-clickbait": 61.0
+    },
+    "lead_word_count_mean": {
+      "clickbait": 32.98,
+      "non-clickbait": 36.72
+    },
+    "lead_word_count_std": {
+      "clickbait": 12.73,
+      "non-clickbait": 13.24
+    },
+    "lead_word_count_median": {
+      "clickbait": 31.0,
+      "non-clickbait": 34.0
+    },
+    "lead_char_len_mean": {
+      "clickbait": 149.54,
+      "non-clickbait": 168.24
+    },
+    "lead_char_len_std": {
+      "clickbait": 57.43,
+      "non-clickbait": 60.5
+    },
+    "lead_char_len_median": {
+      "clickbait": 141.0,
+      "non-clickbait": 155.0
+    }
+  },
+  "punctuation_rates": [
+    {
+      "Feature": "Dấu chấm hỏi (?)",
+      "Label": "non-clickbait",
+      "Rate (%)": 3.4057045551298426
+    },
+    {
+      "Feature": "Dấu chấm hỏi (?)",
+      "Label": "clickbait",
+      "Rate (%)": 20.375586854460092
+    },
+    {
+      "Feature": "Dấu chấm than (!)",
+      "Label": "non-clickbait",
+      "Rate (%)": 0.29799914857386123
+    },
+    {
+      "Feature": "Dấu chấm than (!)",
+      "Label": "clickbait",
+      "Rate (%)": 1.784037558685446
+    },
+    {
+      "Feature": "Dấu ngoặc kép/đơn (\" / ')",
+      "Label": "non-clickbait",
+      "Rate (%)": 11.66453810131971
+    },
+    {
+      "Feature": "Dấu ngoặc kép/đơn (\" / ')",
+      "Label": "clickbait",
+      "Rate (%)": 32.11267605633803
+    },
+    {
+      "Feature": "Chứa con số (0-9)",
+      "Label": "non-clickbait",
+      "Rate (%)": 40.44274159216688
+    },
+    {
+      "Feature": "Chứa con số (0-9)",
+      "Label": "clickbait",
+      "Rate (%)": 31.36150234741784
+    },
+    {
+      "Feature": "Dấu ba chấm (...)",
+      "Label": "non-clickbait",
+      "Rate (%)": 0.21285653469561516
+    },
+    {
+      "Feature": "Dấu ba chấm (...)",
+      "Label": "clickbait",
+      "Rate (%)": 0.9389671361502347
+    },
+    {
+      "Feature": "Từ viết hoa (ALL CAPS)",
+      "Label": "non-clickbait",
+      "Rate (%)": 22.690506598552577
+    },
+    {
+      "Feature": "Từ viết hoa (ALL CAPS)",
+      "Label": "clickbait",
+      "Rate (%)": 12.582159624413144
+    }
+  ]
+}

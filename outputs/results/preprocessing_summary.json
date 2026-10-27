@@ -1,0 +1,131 @@
+{
+  "total_samples": 3414,
+  "missing_lead_ids": [
+    "article_2299",
+    "article_1821",
+    "article_2870"
+  ],
+  "vnexpress_glued_fixed_count": 163,
+  "baomoi_suffix_fixed_count": 716,
+  "splits": {
+    "train": {
+      "total": 2389,
+      "clickbait": 745,
+      "non_clickbait": 1644,
+      "clickbait_ratio": 0.31184596065299286
+    },
+    "val": {
+      "total": 512,
+      "clickbait": 160,
+      "non_clickbait": 352,
+      "clickbait_ratio": 0.3125
+    },
+    "test": {
+      "total": 513,
+      "clickbait": 160,
+      "non_clickbait": 353,
+      "clickbait_ratio": 0.31189083820662766
+    }
+  },
+  "vnexpress_examples": [
+    {
+      "id": "article_0001",
+      "source": "VnExpress",
+      "before": "Nghệ AnCảng hàng không Vinh sẽ ngừng hoạt động từ 1/7 đến hết 31/12/2025 để phục vụ thi công mở rộng, cải tạo nhà ga, sân đỗ và sửa chữa đường cất hạ cánh.",
+      "after": "Nghệ An Cảng hàng không Vinh sẽ ngừng hoạt động từ 1/7 đến hết 31/12/2025 để phục vụ thi công mở rộng, cải tạo nhà ga, sân đỗ và sửa chữa đường cất hạ cánh."
+    },
+    {
+      "id": "article_0002",
+      "source": "VnExpress",
+      "before": "Tuyên QuangĐi theo Google Maps song lại được chỉ vào đoạn ngập, ôtô 5 chỗ bị lũ cuốn, ba người lớn và hai trẻ nhỏ may mắn thoát nạn, đêm 23/6.",
+      "after": "Tuyên Quang Đi theo Google Maps song lại được chỉ vào đoạn ngập, ôtô 5 chỗ bị lũ cuốn, ba người lớn và hai trẻ nhỏ may mắn thoát nạn, đêm 23/6."
+    },
+    {
+      "id": "article_0012",
+      "source": "VnExpress",
+      "before": "Thái NguyênĐang chở con gái, Lê Viết Hoàn dừng ôtô bên đường để sử dụng ma túy, sau đó trong trạng thái kích thích gây tai nạn liên hoàn với hai ôtô khác.",
+      "after": "Thái Nguyên Đang chở con gái, Lê Viết Hoàn dừng ôtô bên đường để sử dụng ma túy, sau đó trong trạng thái kích thích gây tai nạn liên hoàn với hai ôtô khác."
+    },
+    {
+      "id": "article_0020",
+      "source": "VnExpress",
+      "before": "Đà NẵngPhiêu lưu với bản hòa nhạc rock và những màn pháo hoa đa sắc màu, Bồ Đào Nha gây ấn tượng mạnh so với màn trình diễn của đại diện đến từ Anh.",
+      "after": "Đà Nẵng Phiêu lưu với bản hòa nhạc rock và những màn pháo hoa đa sắc màu, Bồ Đào Nha gây ấn tượng mạnh so với màn trình diễn của đại diện đến từ Anh."
+    },
+    {
+      "id": "article_0021",
+      "source": "VnExpress",
+      "before": "Hà NộiTối 21/6, Ban Tổ chức giải báo chí quốc gia trao tặng 13 giải A, 27 giải B và 49 giải C cho các nhóm tác giả từ cơ quan báo chí trung ương và địa phương.",
+      "after": "Hà Nội Tối 21/6, Ban Tổ chức giải báo chí quốc gia trao tặng 13 giải A, 27 giải B và 49 giải C cho các nhóm tác giả từ cơ quan báo chí trung ương và địa phương."
+    }
+  ],
+  "baomoi_examples": [
+    {
+      "id": "article_0220",
+      "source": "Báo Mới",
+      "before": "HIGHLIGHTS: Juventus đại thắng Wydad Casablanca, tiến vào vòng 1/8 - Báo Tiền Phong",
+      "after": "HIGHLIGHTS: Juventus đại thắng Wydad Casablanca, tiến vào vòng 1/8"
+    },
+    {
+      "id": "article_0225",
+      "source": "Báo Mới",
+      "before": "Tình thế đảo ngược với tiền vệ Tuấn Anh - Tạp chí SaoStar",
+      "after": "Tình thế đảo ngược với tiền vệ Tuấn Anh"
+    },
+    {
+      "id": "article_0226",
+      "source": "Báo Mới",
+      "before": "Đội tuyển Malaysia đi tìm 'sân chơi sang chảnh' để tiếp tục đánh bại tuyển Việt Nam - Báo Pháp Luật TP.HCM",
+      "after": "Đội tuyển Malaysia đi tìm 'sân chơi sang chảnh' để tiếp tục đánh bại tuyển Việt Nam"
+    },
+    {
+      "id": "article_0227",
+      "source": "Báo Mới",
+      "before": "Đội tuyển Iran có bị đuổi khỏi World Cup 2026 và Mỹ có bị tước quyền đăng cai World Cup? - Báo Pháp Luật TP.HCM",
+      "after": "Đội tuyển Iran có bị đuổi khỏi World Cup 2026 và Mỹ có bị tước quyền đăng cai World Cup?"
+    },
+    {
+      "id": "article_0228",
+      "source": "Báo Mới",
+      "before": "MU đừng bán Amad - Báo Pháp Luật TP.HCM",
+      "after": "MU đừng bán Amad"
+    }
+  ],
+  "segmentation_examples": [
+    {
+      "id": "article_0001",
+      "title_clean": "Sân bay Vinh đóng cửa 6 tháng để nâng cấp",
+      "title_seg": "Sân_bay Vinh đóng_cửa 6 tháng để nâng_cấp",
+      "lead_clean": "Nghệ An Cảng hàng không Vinh sẽ ngừng họat động từ 1/7 đến hết 31/12/2025 để phục vụ thi công mở rộng, cải tạo nhà ga, s",
+      "lead_seg": "Nghệ_An Cảng hàng_không Vinh sẽ ngừng họat động từ 1 / 7 đến hết 31 / 12 / 2025 để phục_vụ thi_công mở_rộng , cải_tạo nh"
+    },
+    {
+      "id": "article_0002",
+      "title_clean": "5 người thóat nạn khi ôtô bị lũ cuốn",
+      "title_seg": "5 người thóat nạn khi ôtô bị lũ cuốn",
+      "lead_clean": "Tuyên Quang Đi theo Google Maps song lại được chỉ vào đọan ngập, ôtô 5 chỗ bị lũ cuốn, ba người lớn và hai trẻ nhỏ may m",
+      "lead_seg": "Tuyên_Quang Đi theo Google Maps song lại được chỉ vào đọan ngập , ôtô 5 chỗ bị lũ cuốn , ba người_lớn và hai trẻ nhỏ may"
+    },
+    {
+      "id": "article_0004",
+      "title_clean": "Quy họach 9 khu chức năng phía đông TP HCM",
+      "title_seg": "Quy_họach 9 khu chức_năng phía đông TP HCM",
+      "lead_clean": "9 đồ án quy họach 1/2000 được TP Thủ Đức phê duyệt với định hướng phát triển giao thông, công nghệ, tài chính... kỳ vọng",
+      "lead_seg": "9 đồ_án quy họach 1 / 2000 được TP Thủ_Đức phê_duyệt với định_hướng phát_triển giao_thông , công_nghệ , tài_chính ... kỳ"
+    },
+    {
+      "id": "article_0006",
+      "title_clean": "Tổng Bí thư trao quyết định thành lập Cơ quan Ủy ban Trung ương MTTQ Việt Nam",
+      "title_seg": "Tổng_Bí_thư trao quyết_định thành_lập Cơ_quan Ủy_ban Trung_ương MTTQ Việt_Nam",
+      "lead_clean": "Sáng 23/6, Tổng Bí thư Tô Lâm dự và trao quyết định của Bộ Chính trị về việc thành lập Cơ quan Ủy ban Trung ương Mặt trậ",
+      "lead_seg": "Sáng 23 / 6 , Tổng_Bí_thư Tô_Lâm_dự và trao quyết_định của Bộ Chính_trị về việc thành_lập Cơ_quan Ủy_ban Trung_ương Mặt_"
+    },
+    {
+      "id": "article_0010",
+      "title_clean": "Quốc hội bước vào tuần làm việc cuối cùng của kỳ họp dài kỷ lục",
+      "title_seg": "Quốc_hội bước vào tuần làm_việc cuối_cùng của kỳ họp dài kỷ_lục",
+      "lead_clean": "Tuần cuối kỳ họp 9 (23-27/6), Quốc hội sẽ biểu quyết thông qua nhiều luật, nghị quyết quan trọng, trong đó có sửa đổi Bộ",
+      "lead_seg": "Tuần cuối kỳ họp 9 ( 23 - 27 / 6 ) , Quốc_hội sẽ biểu_quyết thông_qua nhiều luật , nghị_quyết quan_trọng , trong đó có s"
+    }
+  ]
+}
