@@ -242,9 +242,9 @@
     const candidates = [];
     const seenTitleNodes = new Set();
 
-    // Ưu tiên tìm theo thẻ card bài viết hoặc các thẻ tiêu đề h2/h3 chứa link
+    // Ưu tiên tìm theo thẻ card bài viết hoặc các thẻ tiêu đề h2/h3 chứa link, hỗ trợ cả thẻ a.title trực tiếp (như bongdaplus.vn)
     const headlineLinks = document.querySelectorAll(
-      "[data-acb-title], h1 a, h2 a, h3 a, h4 a, .title-news a, .article-title a, .story__heading a, .knswli-title a"
+      "[data-acb-title], h1 a, h2 a, h3 a, h4 a, .title-news a, .article-title a, .story__heading a, .knswli-title a, a.title, a.tit, a.post-title, a.article-title, .title a, .tit a"
     );
 
     headlineLinks.forEach((linkEl) => {
@@ -259,7 +259,7 @@
 
       // Tìm thẻ bao ngoài (card) để lấy đoạn sapo đi kèm nếu có
       const card =
-        linkEl.closest("[data-acb-article], article, .item-news, .box-category-item, .knswli, .news-item, .story, li, .card") ||
+        linkEl.closest("[data-acb-article], article, .item-news, .box-category-item, .knswli, .news-item, .story, .news, .item, li, .card") ||
         linkEl.parentElement?.parentElement;
 
       let leadText = "";
@@ -269,7 +269,7 @@
           leadText = sapoAttr.trim();
         } else {
           const descEl = card.querySelector(
-            "[data-acb-sapo], .description, .sapo, .article-excerpt, .knswli-sapo, .story__summary, p"
+            "[data-acb-sapo], .description, .sapo, .summary, .article-excerpt, .knswli-sapo, .story__summary, p"
           );
           if (descEl && descEl !== linkEl && !descEl.contains(linkEl)) {
             leadText = (descEl.textContent || "").replace(/\s+/g, " ").trim();
@@ -400,10 +400,10 @@
     if (!currentSettings.enabled || !currentSettings.showReadingAssistant) return;
 
     const h1El = document.querySelector(
-      "[data-acb-detail-title], h1.title-detail, h1.article-title, h1.the-article-title, h1.kbwc-title, h1.detail-title"
+      "[data-acb-detail-title], h1.title-detail, h1.article-title, h1.the-article-title, h1.kbwc-title, h1.detail-title, h1"
     );
     const sapoEl = document.querySelector(
-      "[data-acb-detail-sapo], p.description, h2.sapo, div.sapo, h2.detail-sapo, .singular-sapo, .article-sapo"
+      "[data-acb-detail-sapo], p.description, h2.sapo, div.sapo, h2.detail-sapo, .singular-sapo, .article-sapo, .summary, .cms-desc"
     );
 
     if (!h1El) return;

@@ -45,6 +45,7 @@
         "*://*.znews.vn/*",
         "*://*.soha.vn/*",
         "*://*.vtcnews.vn/*",
+        "*://*.bongdaplus.vn/*",
         "http://127.0.0.1:7860/demo-news*",
         "http://localhost:7860/demo-news*",
         "file:///*demo_news.html*"

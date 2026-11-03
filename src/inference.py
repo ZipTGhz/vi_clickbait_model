@@ -876,7 +876,7 @@ def extract_article_from_url(url: str, timeout: int = 8) -> Dict[str, str]:
         # 2. Tìm Sapo / Lead Paragraph từ các class đặc trưng của báo Việt Nam hoặc og:description
         sapo_el = soup.select_one(
             "p.description, h2.sapo, div.sapo, h2.detail-sapo, p.the-article-summary, "
-            "h2.kbwc-sapo, .singular-sapo, .article-sapo, .cms-desc"
+            "h2.kbwc-sapo, .singular-sapo, .article-sapo, .summary, .cms-desc"
         )
         if sapo_el and sapo_el.get_text(strip=True):
             lead = sapo_el.get_text(" ", strip=True)
