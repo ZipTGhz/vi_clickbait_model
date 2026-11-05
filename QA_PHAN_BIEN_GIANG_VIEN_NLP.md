@@ -169,3 +169,19 @@ Tài liệu này mô phỏng **20 câu hỏi phản biện chuyên sâu và sắ
 > 1. Khi người dùng bấm nút `🚩 Báo nhầm lẫn` (trên Tooltip hoặc trên thanh Reading Pill), Extension gửi `title`, `lead_paragraph`, `url`, `predicted_label`, `predicted_prob` và `suggested_label` về endpoint `POST /api/feedback`.
 > 2. Server ghi nhận mẫu này vào file nhật ký cách ly `outputs/results/user_feedback.jsonl`.
 > 3. Định kỳ, nhóm phát triển (hoặc người quản trị dữ liệu) sẽ rà soát, kiểm tra chéo các mẫu trong `user_feedback.jsonl` trước khi gộp các mẫu đạt chuẩn vào tập dữ liệu huấn luyện cho phiên bản mô hình tiếp theo.
+
+---
+
+### Câu 19: "Thầy/cô thấy trong mã nguồn của nhóm có xây dựng mô hình `PhoBERT-base-v2` (`src/models_bert.py`), nhưng tại sao trong Chrome Extension và Backend suy diễn thời gian thực (`src/inference.py`) lại không sử dụng PhoBERT?"
+> **Trả lời mẫu:**
+> Dạ thưa thầy/cô, đây là quyết định thiết kế có chủ đích của nhóm dựa trên bài toán **Đánh đổi giữa Độ chính xác và Độ trễ thời gian thực (*Accuracy–Latency Trade-off*)** khi đưa mô hình NLP từ pha Nghiên cứu sang pha Sản phẩm (*Production/MLOps*):
+> 1. **Bài toán Độ trễ khi Quét hàng loạt trên Trang chủ Báo (*Batch Latency*):**
+>    * Khi người dùng mở một trang báo điện tử (`vnexpress.net`, `kenh14.vn`, `bongdaplus.vn`...), Chrome Extension không phải chỉ phân tích 1 câu đơn lẻ, mà phải quét đồng loạt **25 – 60 tiêu đề bài báo** ngay lập tức và tiếp tục quét liên tục mỗi khi người dùng cuộn chuột.
+>    * Tổ hợp **Hybrid Ensemble 4 mô hình (`Linear SVM + Logistic Regression + BiLSTM + TextCNN`)** của nhóm chỉ mất **0.523 ms / bài** trên CPU $\rightarrow$ Quét 1 lô 25 bài báo chỉ tốn **~13 ms**, giúp nhãn Xanh/Vàng/Đỏ hiển thị gần như tức thì.
+>    * Trong khi đó, `PhoBERT-base-v2` (135 triệu tham số, 12 tầng Transformer) khi suy diễn trên CPU phổ thông tốn khoảng **80 – 150 ms / bài** (chậm hơn gấp **~200 lần**) $\rightarrow$ Quét 25 bài trên trang chủ sẽ gây trễ **2.5 – 4 giây** mỗi lần cuộn trang.
+> 2. **Giới hạn Bộ nhớ của Trình duyệt (*Browser Sandbox & RAM*):**
+>    * Ở phía trình duyệt (Client-side Extension), không thể nhúng trực tiếp cục trọng số nặng **~540 MB** của PhoBERT vào gói cài đặt Extension. Do đó, nhóm đã chắt lọc **1,600 trọng số n-gram quan trọng nhất** ra file `extension/model_weights.json` chỉ nặng **~45 KB** (nhẹ hơn PhoBERT **12,000 lần**) để chạy chế độ *Offline Fallback* trong `< 1 ms`.
+>    * Ở phía Backend (`app.py`), không nạp PhoBERT mặc định giúp server khởi động nhanh trong 2–3 giây và tiết kiệm hơn **1.2 GB RAM** cho máy cá nhân.
+> 3. **Hiệu quả thực nghiệm:**
+>    * Trên tập dữ liệu `3,414` bài báo, tổ hợp `Hybrid Ensemble (SVM + LR + BiLSTM + TextCNN)` trên không gian `16,012` chiều đã đạt **ROC-AUC 86.41%** và `Linear SVM` đạt **Accuracy 81.29%**, đảm bảo độ chính xác rất cao với chi phí tính toán chỉ bằng **1/200** so với Transformer.
+
