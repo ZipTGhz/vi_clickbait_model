@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slide Thuyết Trình — Phát hiện & Giải thích Tin Giật Tít Tiếng Việt</title>
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --accent-green: #4ade80;
+      --accent-red: #f87171;
+      --accent-amber: #fbbf24;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    /* HEADER NAVIGATION */
+    .deck-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 28px;
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid var(--border);
+    }
+    .part-tag {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+    .slide-pills {
+      display: flex;
+      gap: 6px;
+    }
+    .pill-btn {
+      width: 30px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .pill-btn.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: var(--primary);
+      transform: scale(1.06);
+    }
+    /* MAIN STAGE */
+    .deck-stage {
+      flex: 1;
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 28px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+    }
+    .slide-title {
+      font-size: 30px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+    .slide-subtitle {
+      font-size: 16px;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+    .slide-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .slide-grid.full {
+      grid-template-columns: 1fr;
+    }
+    .card-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .bullet-list li {
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: #e2e8f0;
+      padding-left: 14px;
+      border-left: 3px solid var(--primary);
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .kpi-box {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+    }
+    .kpi-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent-green);
+    }
+    .kpi-lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .visual-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .visual-panel img {
+      max-width: 100%;
+      max-height: 320px;
+      border-radius: 10px;
+      object-fit: contain;
+      background: #fff;
+      padding: 6px;
+    }
+    .visual-caption {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+    table.bench-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: left;
+    }
+    table.bench-table th, table.bench-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    table.bench-table th {
+      color: var(--primary);
+      font-weight: 700;
+      background: rgba(15, 23, 42, 0.5);
+    }
+    /* FOOTER */
+    .deck-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 28px;
+      background: rgba(15, 23, 42, 0.95);
+      border-top: 1px solid var(--border);
+      font-size: 13.5px;
+    }
+    .speaker-note {
+      color: var(--accent-amber);
+      font-weight: 600;
+    }
+    .nav-btns {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-nav {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .btn-nav.primary {
+      background: #2563eb;
+      border-color: var(--primary);
+    }
+    .btn-nav:hover { filter: brightness(1.15); }
+  </style>
+</head>
+<body>
+  <header class="deck-header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="part-tag" id="hdr-part">PHẦN I</span>
+      <span style="color:var(--text-muted);font-size:13px;font-weight:700;" id="hdr-count">Slide 1 / 12</span>
+    </div>
+    <div class="slide-pills" id="hdr-pills"></div>
+    <button class="btn-nav" onclick="toggleFullScreen()" title="Phóng to toàn màn hình (Phím F)">⛶ Toàn màn hình</button>
+  </header>
+
+  <main class="deck-stage" id="stage"></main>
+
+  <footer class="deck-footer">
+    <div class="speaker-note" id="ftr-note">🎤 Gợi ý thuyết trình</div>
+    <div class="nav-btns">
+      <button class="btn-nav" id="btn-prev">← Slide trước ( Phím ← )</button>
+      <button class="btn-nav primary" id="btn-next">Slide tiếp theo ( Phím → ) →</button>
+    </div>
+  </footer>
+
+  <script>
+    const SLIDES = [
+      {
+        part: "SLIDE 1 · INTRODUCTION",
+        title: "Slide 1: Hệ thống Phát hiện & Giải thích Tin Giật Tít Tiếng Việt",
+        subtitle: "Từ Mô hình Phân loại Ngữ nghĩa NLP (Title + Sapo) đến Tiện ích Trình duyệt 3 Tầng (Ambient Computing)",
+        bullets: [
+          "<b>Bối cảnh & Động lực:</b> Tiêu đề giật tít (Clickbait) khai thác khoảng trống tò mò (<i>Curiosity Gap</i>) làm sai lệch trọng tâm thông tin; tuy nhiên <b>Tin giật tít ≠ Tin giả (Fake News)</b>.",
+          "<b>Mục tiêu nghiên cứu:</b> Phân loại nhị phân (<code>Giật tít</code> vs <code>Không giật tít</code>) kết hợp giải thích trọng số từ khóa (<b>XAI</b>) và tái cấu trúc tiêu đề trung lập (<b>De-clickbait</b>).",
+          "<b>Phạm vi thực nghiệm:</b> Khảo sát <b>3,414 bài báo</b> từ 8 nguồn tin Việt Nam, đối sánh <b>ML truyền thống · Deep Learning (BiLSTM, TextCNN) · PhoBERT · Hybrid Ensemble</b>."
+        ],
+        kpi: [
+          { val: "3,414 mẫu", lbl: "8 Nguồn báo Việt Nam" },
+          { val: "81.29% Acc", lbl: "Linear SVM (Macro-F1 78.76%)" },
+          { val: "86.41% AUC", lbl: "Hybrid Ensemble (0.52ms)" }
+        ],
+        visualHtml: `
+          <div style="padding:18px;text-align:left;width:100%;background:#0f172a;border-radius:12px;border:1px solid #334155;">
+            <div style="color:#38bdf8;font-weight:800;font-size:14px;margin-bottom:10px;">🏗️ PIPELINE TỔNG THỂ TRONG DỰ ÁN</div>
+            <div style="padding:10px;background:#1e293b;border-radius:8px;margin-bottom:8px;font-size:13px;">
+              <b>1. Tiền xử lý & Đặc trưng (65%–70%):</b> Khử dính chữ VnExpress (163 mẫu), cắt đuôi Báo Mới (716 mẫu), Unicode NFC + chuẩn hóa dấu thanh, tách từ PyVi, Dual TF-IDF (16,000 chiều) + 12 Hand-crafted features.
+            </div>
+            <div style="padding:10px;background:#1e293b;border-radius:8px;margin-bottom:8px;font-size:13px;">
+              <b>2. Mô hình & Giải thích XAI:</b> Naive Bayes, Logistic Regression, Linear SVM, Random Forest, BiLSTM, TextCNN, PhoBERT-base-v2 & Hybrid Ensemble + Token Attribution.
+            </div>
+            <div style="padding:10px;background:#1e293b;border-radius:8px;font-size:13px;">
+              <b>3. Triển khai Thực tế (20%–25%):</b> Demo Gradio + FastAPI (:7860) & Chrome Extension Manifest V3 (Suy diễn 2 tầng Online/Offline).
+            </div>
+          </div>
+        `,
+        note: "Thông điệp: Giải quyết trọn vẹn bài toán phát hiện giật tít tiếng Việt từ chuẩn hóa dữ liệu đặc thù đến triển khai thời gian thực."
+      },
+      {
+        part: "SLIDE 2 · PROBLEM FORMULATION",
+        title: "Slide 2: Phát biểu Bài toán & Cơ sở Ngôn ngữ học (Title + Sapo)",
+        subtitle: "Tại sao chỉ nhìn Tiêu đề (Only Title) là chưa đủ để kết luận một bài báo giật tít?",
+        bullets: [
+          "<b>Định nghĩa toán học:</b> Cho cặp văn bản $x = (T, S)$ gồm Tiêu đề $T$ (<code>title</code>) và Đoạn mở đầu $S$ (<code>lead_paragraph</code>), ánh xạ $f(T, S) \\rightarrow \\hat{y} \\in \\{0, 1\\}$ và xác suất $P(y=1|T,S) \\in [0,1]$.",
+          "<b>Hạn chế của Only Title:</b> Một tiêu đề giàu kịch tính vẫn là <code>Không giật tít</code> nếu nội dung Sapo chứng minh sự kiện có thật tương ứng; ngược lại, giật tít xảy ra khi $T$ <b>cố tình ẩn chủ thể</b> hoặc <b>phóng đại</b> so với $S$.",
+          "<b>Thống kê thực nghiệm trên tập dữ liệu:</b> Dấu hỏi <code>?</code> xuất hiện ở <b>20.38%</b> tin Giật tít (so với <b>3.41%</b> Không giật tít — gấp 6 lần); dấu trích dẫn <code>\"...\"</code> chiếm <b>32.11%</b> vs <b>11.66%</b>."
+        ],
+        kpi: [
+          { val: "20.38% vs 3.41%", lbl: "Tỷ lệ dấu hỏi (?) CB vs Non-CB" },
+          { val: "32.11% vs 11.66%", lbl: "Tỷ lệ ngoặc kép (\"...\")" },
+          { val: "13.98 vs 32.98", lbl: "Số từ TB Title vs Sapo (CB)" }
+        ],
+        img: "outputs/figures/01_label_distribution.png",
+        caption: "Phân bố nhãn: 2,349 Không giật tít (68.80%) vs 1,065 Giật tít (31.20%)",
+        note: "Thông điệp: Kết hợp Title + Sapo giúp mô hình kiểm chứng khoảng trống thông tin thay vì chỉ bắt từ khóa bề mặt."
+      },
+      {
+        part: "SLIDE 3 · DATASET & DATA LEAKAGE",
+        title: "Slide 3: Tập Dữ liệu (3,414 mẫu) & Kiểm soát Rò rỉ Dữ liệu",
+        subtitle: "Phân biệt giữa chống Shortcut Learning theo nguồn tin và kiểm soát trùng lặp văn bản",
+        bullets: [
+          "<b>Phân chia Stratified Split (70/15/15, seed=42):</b> Train <code>2,389</code> mẫu (745 CB / 1,644 Non-CB) · Val <code>512</code> mẫu (160 CB / 352 Non-CB) · Test <code>513</code> mẫu (160 CB / 353 Non-CB).",
+          "<b>Thiên lệch nguồn tin (Source Bias):</b> Kênh14 (<b>76.92%</b> CB), SaoStar (<b>65.03%</b> CB) đối lập với VnExpress (<b>14.47%</b> CB). Loại bỏ cột <code>source</code> và cắt hậu tố tên báo ngăn mô hình học tắt theo tên tòa soạn.",
+          "<b>Kiểm tra trùng lặp & Rò rỉ nội dung:</b> Phát hiện <b>39 bài trùng tiêu đề</b> (1.14%) trên toàn tập (13 tiêu đề giao thoa Train–Test do các báo đăng lại cùng bản tin); bên cạnh xóa cột <code>source</code>, văn phong đặc trưng từng báo vẫn là yếu tố cần kiểm soát tiếp bằng Source Holdout."
+        ],
+        kpi: [
+          { val: "76.92% vs 14.47%", lbl: "CB: Kênh14 vs VnExpress" },
+          { val: "70.59% vs 16.76%", lbl: "CB: Giải trí vs Chính trị" },
+          { val: "39 mẫu (1.14%)", lbl: "Bản tin đăng lại trùng Title" }
+        ],
+        img: "outputs/figures/02_source_category_distribution.png",
+        caption: "Phân bố tỷ lệ Giật tít theo 8 Nguồn báo và 13 Chuyên mục",
+        note: "Thông điệp: Loại bỏ cột source ngăn học vẹt tên báo trực tiếp, đồng thời nhóm đã thống kê định lượng 39 mẫu trùng lặp giữa các nguồn."
+      },
+      {
+        part: "SLIDE 4 · DATA PREPROCESSING",
+        title: "Slide 4: Tiền xử lý Đặc thù Báo chí Tiếng Việt & Tách từ PyVi",
+        subtitle: "Khử sạch 2 lỗi nhiễu cào dữ liệu thực tế trước khi chuẩn hóa ngôn ngữ",
+        bullets: [
+          "<b>1. Tách địa danh dính đầu Sapo VnExpress (163 mẫu):</b> Dùng Regex tách <i>“Nghệ AnCảng hàng không...”</i> → <i>“Nghệ An Cảng hàng không...”</i> kèm Whitelist bảo toàn <b>35 thương hiệu CamelCase</b> (<code>TikTok, iPhone, VinFast, ChatGPT...</code>).",
+          "<b>2. Cắt hậu tố nguồn tin Báo Mới (716 mẫu):</b> Loại bỏ hoàn toàn phần đuôi <i>“... - Tạp chí SaoStar”</i>, <i>“... - Báo...”</i> ở cuối tiêu đề và điền chuỗi rỗng cho <b>3 mẫu thiếu Sapo</b>.",
+          "<b>3. Chuẩn hóa Unicode NFC, Dấu thanh & Tách từ PyVi:</b> Đưa văn bản về <code>unicodedata.normalize('NFC')</code> (tránh vỡ từ do tổ hợp NFD), chuẩn hóa bảng dấu thanh (<code>oà→òa, uỳ→ùy</code>) và tách từ ghép bằng <code>ViTokenizer</code> (<code>bất_ngờ, tiết_lộ</code>)."
+        ],
+        kpi: [
+          { val: "163 mẫu", lbl: "Khử dính địa danh VnExpress" },
+          { val: "716 mẫu", lbl: "Cắt hậu tố nguồn Báo Mới" },
+          { val: "35 Brands", lbl: "Bảo toàn CamelCase Whitelist" }
+        ],
+        img: "outputs/figures/03_text_length_distribution.png",
+        caption: "Phân phối độ dài từ của Tiêu đề (TB ~14 từ) và Đoạn mở đầu Sapo (TB ~35 từ)",
+        note: "Thông điệp: Phân biệt rõ chuẩn hóa mã ký tự Unicode NFC, chuẩn hóa quy tắc đặt dấu thanh tiếng Việt và khử nhiễu nguồn tin."
+      },
+      {
+        part: "SLIDE 5 · FEATURE ENGINEERING & ABLATION",
+        title: "Slide 5: Kỹ thuật Đặc trưng & Ablation Study 3 Cấu hình Đầu vào",
+        subtitle: "Chứng minh thực nghiệm sự đóng góp của Sapo và 12 Đặc trưng Thủ công",
+        bullets: [
+          "<b>Không gian Dual TF-IDF (16,000 chiều):</b> Ghép <code>TF-IDF(Title + [SEP] + Sapo)</code> (10,000 chiều, 1–2 grams, sublinear TF) với <code>TF-IDF(Title) × 1.25</code> (6,000 chiều) để Sapo dài không làm loãng từ khóa giật tít trên tiêu đề.",
+          "<b>12 Đặc trưng Thủ công (MinMaxScaler [0,1]):</b> Độ dài từ/ký tự của Title & Sapo, tỷ lệ <code>len(Title)/len(Sapo)</code>, số từ viết HOA, tỷ lệ ký tự hoa và 5 cờ dấu câu (<code>?, !, \"...\", ..., chữ số</code>).",
+          "<b>Kết quả Ablation Study (trên tập Test 513 mẫu):</b> Bổ sung Sapo + 12 Hand-crafted giúp Logistic Regression tăng Macro-F1 từ <b>76.58% → 78.76% (+2.18%)</b> và Linear SVM tăng từ <b>76.41% → 77.97% (+1.56%)</b>."
+        ],
+        kpi: [
+          { val: "76.58% → 78.76%", lbl: "Macro-F1 LR (+2.18%)" },
+          { val: "76.41% → 77.97%", lbl: "Macro-F1 SVM (+1.56%)" },
+          { val: "16,012 chiều", lbl: "10k T+S + 6k Title + 12 HC" }
+        ],
+        visualHtml: `
+          <div style="width:100%;">
+            <div style="color:#38bdf8;font-weight:800;font-size:13.5px;margin-bottom:8px;text-align:left;">📊 BẢNG ABLATION STUDY 3 CẤU HÌNH ĐẦU VÀO (TEST SET N = 513)</div>
+            <table class="bench-table">
+              <thead>
+                <tr>
+                  <th>Cấu hình Đặc trưng Đầu vào</th>
+                  <th>LR Acc</th>
+                  <th>LR Macro-F1</th>
+                  <th>LR AUC</th>
+                  <th>SVM Acc</th>
+                  <th>SVM Macro-F1</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>1. Only Title</b> (Chỉ TF-IDF 10k)</td>
+                  <td>78.95%</td>
+                  <td>76.58%</td>
+                  <td>85.64%</td>
+                  <td>79.92%</td>
+                  <td>76.41%</td>
+                </tr>
+                <tr>
+                  <td><b>1b. Only Title + 12 Hand-crafted</b></td>
+                  <td>79.73%</td>
+                  <td>77.19%</td>
+                  <td>85.00%</td>
+                  <td>80.90%</td>
+                  <td>77.27%</td>
+                </tr>
+                <tr>
+                  <td><b>2. Title + Sapo</b> (Dual TF-IDF 16k)</td>
+                  <td>79.34%</td>
+                  <td>77.08%</td>
+                  <td><b>86.54%</b></td>
+                  <td>80.12%</td>
+                  <td>76.43%</td>
+                </tr>
+                <tr style="background:rgba(56,189,248,0.14);">
+                  <td><b>3. Title + Sapo + 12 Hand-crafted (Full)</b></td>
+                  <td><b>81.09%</b></td>
+                  <td><b>78.76%</b></td>
+                  <td>86.34%</td>
+                  <td><b>81.29%</b></td>
+                  <td><b>77.97%</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `,
+        note: "Thông điệp: Cả 2 thành phần (ngữ cảnh Sapo và 12 đặc trưng cảm thán thủ công) đều mang lại mức tăng trưởng F1 rõ rệt trên tập Test."
+      },
+      {
+        part: "SLIDE 6 · MODEL ARCHITECTURE",
+        title: "Slide 6: Kiến trúc Các Nhóm Mô hình & Cơ chế Hybrid Ensemble",
+        subtitle: "Kết hợp ưu thế biên phân lớp phẳng của ML và khả năng trích xuất chuỗi của Deep Learning",
+        bullets: [
+          "<b>Nhóm 1 — Machine Learning (Scikit-learn):</b> <code>MultinomialNB (α=0.5)</code>, <code>Logistic Regression (C=1.5, balanced)</code>, <code>LinearSVC (C=0.8) + CalibratedClassifierCV (5-fold)</code>, <code>Random Forest (300 cây)</code>.",
+          "<b>Nhóm 2 — Deep Learning (PyTorch):</b> Từ điển <code>15,000</code> từ (max_len=128), <code>Embedding(128) → SpatialDropout1D(0.2)</code> → nhánh <b>BiLSTM (hidden=64×2)</b> hoặc <b>TextCNN (filters=[2,3,5], 64 kênh)</b> ghép nối với nhánh <code>Linear(12→16)</code> của 12 đặc trưng thủ công.",
+          "<b>Nhóm 3 — Transformer & Hybrid Ensemble:</b> Thực nghiệm fine-tune <code>vinai/phobert-base-v2</code> (đóng băng Embedding + 6 tầng đầu); khi triển khai thực tế sử dụng <b>Soft-Voting Hybrid Ensemble</b>: $P_{\\text{ens}} = 0.35 P_{\\text{SVM}} + 0.20 P_{\\text{LR}} + 0.22 P_{\\text{BiLSTM}} + 0.23 P_{\\text{TextCNN}}$ để đạt tốc độ <code>0.52 ms/mẫu</code> trên CPU."
+        ],
+        kpi: [
+          { val: "0.35·SVM + 0.20·LR", lbl: "Trọng số Nhánh ML (55%)" },
+          { val: "0.22·LSTM + 0.23·CNN", lbl: "Trọng số Nhánh DL (45%)" },
+          { val: "0.523 ms/mẫu", lbl: "Độ trễ Ensemble trên CPU" }
+        ],
+        visualHtml: `
+          <div style="width:100%;text-align:left;background:#0f172a;padding:16px;border-radius:12px;border:1px solid #334155;font-size:13px;">
+            <div style="color:#38bdf8;font-weight:800;margin-bottom:8px;">⚙️ SƠ ĐỒ HỢP NHẤT DỰ ĐOÁN (SOFT-VOTING ENSEMBLE)</div>
+            <div style="padding:8px 10px;background:#1e293b;border-radius:8px;margin-bottom:6px;border-left:3px solid #38bdf8;">
+              <b>1. Calibrated Linear SVM (w = 0.35):</b> Biên phân lớp siêu phẳng tối ưu Precision (70.78%) trên không gian 16,012 chiều.
+            </div>
+            <div style="padding:8px 10px;background:#1e293b;border-radius:8px;margin-bottom:6px;border-left:3px solid #4ade80;">
+              <b>2. Logistic Regression (w = 0.20):</b> Tối ưu Recall (76.88%) & cung cấp trọng số giải thích trực tiếp từng token.
+            </div>
+            <div style="padding:8px 10px;background:#1e293b;border-radius:8px;margin-bottom:6px;border-left:3px solid #fbbf24;">
+              <b>3. BiLSTM (w = 0.22) + TextCNN (w = 0.23):</b> Nắm bắt quan hệ ngữ cảnh hai chiều và cụm n-gram ẩn ý độ dài 2, 3, 5 từ.
+            </div>
+            <div style="padding:8px 10px;background:rgba(239,68,68,0.12);border-radius:8px;border-left:3px solid #f87171;font-size:12px;">
+              <b>Lý do không đưa PhoBERT vào Ensemble thời gian thực:</b> PhoBERT nặng ~540MB và suy diễn CPU chậm gấp >150 lần, trong khi 4 mô hình trên chỉ tốn <b>0.523 ms/mẫu</b> và đạt ROC-AUC <b>86.41%</b>.
+            </div>
+          </div>
+        `,
+        note: "Thông điệp: Tách bạch rõ mô hình thử nghiệm nghiên cứu (bao gồm PhoBERT) và tổ hợp Ensemble tối ưu hóa độ trễ trên CPU."
+      },
+      {
+        part: "SLIDE 7 · EXPERIMENTAL RESULTS",
+        title: "Slide 7: Kết quả Thực nghiệm Đa Mô hình & Ma trận Nhầm lẫn",
+        subtitle: "Đánh giá độc lập trên 513 mẫu Test Set (353 Không giật tít · 160 Giật tít)",
+        bullets: [
+          "<b>So sánh ML vs DL trên cỡ mẫu 3,414 bài:</b> <b>Linear SVM</b> đạt Accuracy cao nhất (<b>81.29%</b>, Precision CB <b>70.78%</b>) và <b>Logistic Regression</b> đạt Macro-F1 cao nhất (<b>78.76%</b>, Recall CB <b>76.88%</b>) nhờ không gian Dual TF-IDF ít bị overfitting hơn mạng nơ-ron khởi tạo từ đầu.",
+          "<b>Hiệu quả của Hybrid Ensemble:</b> Đạt <b>ROC-AUC cao nhất toàn cục (86.41%)</b>, cân bằng tốt giữa False Positives (<code>62</code>) và False Negatives (<code>43</code>).",
+          "<b>Chuẩn đo độ trễ (Latency):</b> Đo trực tiếp trên <code>CPU (batch=513 mẫu Test)</code> — ML truyền thống tốn <code>0.0015 – 0.0083 ms/mẫu</code>, hoàn toàn đáp ứng yêu cầu quét hàng loạt tiêu đề theo thời gian thực."
+        ],
+        kpi: [
+          { val: "81.29%", lbl: "Best Acc (Linear SVM)" },
+          { val: "78.76%", lbl: "Best Macro-F1 (Logistic Reg)" },
+          { val: "86.41%", lbl: "Best ROC-AUC (Ensemble)" }
+        ],
+        visualHtml: `
+          <div style="width:100%;">
+            <table class="bench-table" style="font-size:12.5px;">
+              <thead>
+                <tr>
+                  <th>Mô hình (Title + Sapo + 12 HC)</th>
+                  <th>Acc</th>
+                  <th>Prec(CB)</th>
+                  <th>Rec(CB)</th>
+                  <th>F1(CB)</th>
+                  <th>Macro-F1</th>
+                  <th>ROC-AUC</th>
+                  <th>CM [TN,FP / FN,TP]</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>TF-IDF + Naive Bayes</b></td>
+                  <td>81.09%</td>
+                  <td>70.59%</td>
+                  <td>67.50%</td>
+                  <td>69.01%</td>
+                  <td>77.70%</td>
+                  <td>85.51%</td>
+                  <td>[308, 45 / 52, 108]</td>
+                </tr>
+                <tr>
+                  <td><b>TF-IDF + Random Forest</b></td>
+                  <td>80.51%</td>
+                  <td><b>71.43%</b></td>
+                  <td>62.50%</td>
+                  <td>66.67%</td>
+                  <td>76.45%</td>
+                  <td>85.87%</td>
+                  <td>[313, 40 / 60, 100]</td>
+                </tr>
+                <tr>
+                  <td><b>TF-IDF + Logistic Regression</b></td>
+                  <td>81.09%</td>
+                  <td>67.21%</td>
+                  <td><b>76.88%</b></td>
+                  <td><b>71.72%</b></td>
+                  <td><b>78.76%</b></td>
+                  <td>86.34%</td>
+                  <td>[293, 60 / 37, 123]</td>
+                </tr>
+                <tr>
+                  <td><b>TF-IDF + Linear SVM</b></td>
+                  <td><b>81.29%</b></td>
+                  <td>70.78%</td>
+                  <td>68.13%</td>
+                  <td>69.43%</td>
+                  <td>77.97%</td>
+                  <td>85.82%</td>
+                  <td>[308, 45 / 51, 109]</td>
+                </tr>
+                <tr>
+                  <td><b>BiLSTM (PyTorch)</b></td>
+                  <td>77.19%</td>
+                  <td>61.14%</td>
+                  <td>73.75%</td>
+                  <td>66.86%</td>
+                  <td>74.74%</td>
+                  <td>85.19%</td>
+                  <td>[278, 75 / 42, 118]</td>
+                </tr>
+                <tr>
+                  <td><b>TextCNN (1D-CNN [2,3,5])</b></td>
+                  <td>78.56%</td>
+                  <td>64.53%</td>
+                  <td>69.38%</td>
+                  <td>66.87%</td>
+                  <td>75.51%</td>
+                  <td>84.15%</td>
+                  <td>[292, 61 / 49, 111]</td>
+                </tr>
+                <tr style="background:rgba(56,189,248,0.14);">
+                  <td><b>🏆 Hybrid Ensemble (4 Models)</b></td>
+                  <td>79.53%</td>
+                  <td>65.36%</td>
+                  <td>73.13%</td>
+                  <td>69.03%</td>
+                  <td>76.87%</td>
+                  <td><b>86.41%</b></td>
+                  <td>[291, 62 / 43, 117]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `,
+        note: "Thông điệp: Báo cáo đầy đủ 7 chỉ số và Confusion Matrix cho từng mô hình; giải thích rõ tại sao TF-IDF + Linear Model vượt trội trên tập dữ liệu 3,414 mẫu."
+      },
+      {
+        part: "SLIDE 8 · EXPLAINABLE AI & DE-CLICKBAIT",
+        title: "Slide 8: Giải thích Mô hình (XAI) & Tái cấu trúc Tiêu đề (De-clickbait)",
+        subtitle: "Phân biệt rõ cơ chế Giải thích dự đoán (XAI) và Hậu xử lý ngôn ngữ (De-clickbait)",
+        bullets: [
+          "<b>Global Feature Importance:</b> Top đặc trưng đẩy về <code>Giật tít</code> gồm <code>bất_ngờ (+2.72)</code>, <code>khiến (+2.18)</code>, <code>[HC]_has_question (+2.16)</code>, <code>gây (+1.84)</code>, <code>[HC]_has_ellipsis (+1.68)</code>, <code>tiết_lộ (+1.57)</code>; đẩy về <code>Không giật tít</code> gồm <code>báo_chí (-1.20)</code>, <code>đà_nẵng (-1.13)</code>, <code>việt_nam (-1.11)</code>.",
+          "<b>Local Explanation (Giải thích từng bài báo):</b> Tính điểm đóng góp của từng token đang xuất hiện $s(t_i) = \\text{TF-IDF}(t_i) \\times w_{t_i}$ để tô màu trực tiếp từ khóa kích động (Đỏ) và từ khóa trung lập (Xanh).",
+          "<b>Hậu xử lý De-clickbait (Tái cấu trúc tiêu đề):</b> Không dùng mô hình sinh tự do (tránh ảo giác/hallucination) mà áp dụng <b>Extractive Rule-based</b>: trích xuất câu sự kiện đầu tiên từ Sapo (15–145 ký tự) hoặc cắt bỏ cụm hư từ cảm thán ở đầu/cuối câu."
+        ],
+        kpi: [
+          { val: "+2.72 / +2.18", lbl: "Trọng số 'bất_ngờ' / 'khiến'" },
+          { val: "TF-IDF × w_i", lbl: "Local Token Attribution" },
+          { val: "0% Bịa đặt", lbl: "Extractive De-clickbait từ Sapo" }
+        ],
+        img: "outputs/figures/09_feature_importance_top20.png",
+        caption: "Top 20 đặc trưng n-gram hướng về Giật tít (Đỏ) và Không giật tít (Xanh)",
+        note: "Thông điệp: XAI giải thích tại sao mô hình dự đoán Giật tít, còn De-clickbait là module trích xuất thông tin thực từ Sapo đảm bảo 100% không bịa đặt."
+      },
+      {
+        part: "SLIDE 9 · PRODUCT DESIGN: AMBIENT EXTENSION",
+        title: "Slide 9: Thiết kế Sản phẩm: Ambient Computing & Giao diện 3 Tầng",
+        subtitle: "Đưa mô hình NLP vào đúng điểm chạm đọc báo mà không bắt người dùng thao tác thủ công",
+        bullets: [
+          "<b>Triết lý Ambient Computing (Zero-Friction UX):</b> Thay vì bắt người dùng copy-paste từng tiêu đề sang web khác, Extension tự động quét ngầm toàn trang báo và hiển thị nhãn tín hiệu ngay cạnh tiêu đề.",
+          "<b>Tầng 1 — In-Page Ambient Badges:</b> Gắn nhãn 🟢 <code>Không giật tít</code> (<45%) · 🟡 <code>Chú ý</code> (45%–64%) · 🔴 <code>Giật tít</code> (≥65%); rê chuột hiện <b>Tooltip Tóm tắt Sapo + Tiêu đề tháo tít</b> để đọc ngay không cần click vào bài câu view.",
+          "<b>Tầng 2 (Reading Assistant Pill) & Tầng 3 (Action Popup):</b> Thanh nổi góc dưới phải khi đọc bài chi tiết (hỗ trợ <b>✨ Tháo tít trực tiếp trên DOM</b> & <b>🚩 Báo nhầm lẫn</b>) + Popup thống kê độ sạch trang báo, số phút tiết kiệm và công tắc <b>Làm mờ (Blur)</b>."
+        ],
+        kpi: [
+          { val: "Tầng 1", lbl: "Ambient Badge & Hover Sapo" },
+          { val: "Tầng 2", lbl: "Reading Pill & DOM De-clickbait" },
+          { val: "Tầng 3", lbl: "Popup Thống kê & Auto-Blur" }
+        ],
+        visualHtml: `
+          <div style="width:100%;text-align:left;background:#0f172a;padding:16px;border-radius:12px;border:1px solid #334155;font-size:13px;">
+            <div style="margin-bottom:10px;padding:10px;background:#1e293b;border-radius:8px;border-left:4px solid #ef4444;">
+              <b>📰 Minh họa Tầng 1 ngay trên Trang chủ Báo điện tử:</b><br>
+              Hé lộ danh tính người đàn ông bí ẩn khiến MXH xôn xao!
+              <span style="background:#fee2e2;color:#b91c1c;padding:2px 8px;border-radius:999px;font-weight:700;font-size:11.5px;">🔴 Giật tít · 98%</span>
+              <div style="margin-top:6px;color:#cbd5e1;font-size:12px;">💡 <b>Hover Tooltip (Đọc luôn không cần click):</b> Đó là trợ lý sản xuất hỗ trợ lịch trình quay quảng cáo tại sân bay.</div>
+            </div>
+            <div style="padding:10px;background:#1e293b;border-radius:8px;border-left:4px solid #38bdf8;">
+              <b>🛡️ Tầng 2 & Tầng 3 (Đã hoàn thiện 100%):</b> Nút <code>[✨ Tháo tít trên trang]</code> thay thế tiêu đề ngay trên DOM · Nút <code>[🚩 Báo nhầm lẫn]</code> gửi mẫu về <code>/api/feedback</code> · Công tắc <code>Auto-Blur</code> làm mờ bài giật tít.
+            </div>
+          </div>
+        `,
+        note: "Thông điệp: Giao diện 3 tầng giúp người đọc nhận biết và nắm nội dung thật của bài báo ngay từ trang chủ mà không tốn một cú click."
+      },
+      {
+        part: "SLIDE 10 · SYSTEM ARCHITECTURE & DEPLOYMENT",
+        title: "Slide 10: Kiến trúc Kỹ thuật: Suy diễn 2 Tầng (Online Ensemble ⇄ Offline Local ML)",
+        subtitle: "Giải quyết bài toán độ trễ thời gian thực và khả năng hoạt động độc lập khi tắt Backend",
+        bullets: [
+          "<b>Trích xuất DOM Đa năng (content.js):</b> Quét bộ chọn thích ứng cho 15+ báo Việt Nam (<code>h1–h4 a, .title-news a, a.title...</code>), lọc nhiễu menu (yêu cầu ≥ 6 từ, ≥ 26 ký tự) và dùng <code>Element.closest()</code> tìm Sapo đi kèm.",
+          "<b>Suy diễn 2 Tầng (Two-Tier Inference trong background.js):</b> Tầng Online gọi <code>POST /api/predict_batch</code> chạy <b>Hybrid Ensemble</b>; khi tắt server, tự động chuyển sang <b>Local ML Fallback</b> đọc <code>model_weights.json</code> (chứa <b>800 n-gram dương + 800 n-gram âm</b> trích xuất từ Logistic Regression kết hợp 5 luật cảm thán + độ lệch Title–Sapo).",
+          "<b>Phân biệt Độ trễ & Quy trình Active Learning:</b> Suy diễn mô hình tốn <code>0.52 ms/mẫu</code> (Server) hoặc <code>< 1 ms</code> (Local JS), tổng thời gian khứ hồi toàn Extension (DOM + HTTP + Render) đạt <code>15–40 ms/lô</code>. Nút báo nhầm lưu vào <code>outputs/results/user_feedback.jsonl</code> để <b>con người kiểm duyệt (Human-in-the-loop)</b> trước khi tái huấn luyện."
+        ],
+        kpi: [
+          { val: "1,600 n-grams", lbl: "800 Pos + 800 Neg (Local JSON)" },
+          { val: "0.52ms / 15-40ms", lbl: "Model Latency vs End-to-End" },
+          { val: "user_feedback.jsonl", lbl: "Lưu phản hồi có kiểm duyệt" }
+        ],
+        visualHtml: `
+          <div style="width:100%;text-align:left;background:#0f172a;padding:16px;border-radius:12px;border:1px solid #334155;font-family:monospace;font-size:12px;color:#cbd5e1;">
+            <div style="color:#4ade80;font-weight:700;margin-bottom:4px;">// 1. Quét DOM & Gom lô 25 bài báo (content.js)</div>
+            <div>const links = document.querySelectorAll("h2 a, h3 a, .title-news a, a.title");</div>
+            <div style="color:#38bdf8;font-weight:700;margin:8px 0 4px 0;">// 2. Two-Tier Inference: Server Ensemble ⇄ Local 1,600 N-grams (background.js)</div>
+            <div>fetch("http://127.0.0.1:7860/api/predict_batch") // Timeout 2.8s → Fallback Local ML</div>
+            <div style="color:#fbbf24;font-weight:700;margin:8px 0 4px 0;">// 3. Nhúng DOM Cô lập CSS & Thu thập Phản hồi Kiểm duyệt</div>
+            <div>titleEl.insertAdjacentElement("afterend", badgeEl); // .vn-acb-badge</div>
+            <div>POST /api/feedback → outputs/results/user_feedback.jsonl</div>
+          </div>
+        `,
+        note: "Thông điệp: Kiến trúc 2 tầng minh bạch hóa nguồn gốc 1,600 trọng số Local ML, tách rõ độ trễ mô hình vs độ trễ toàn hệ thống và kiểm duyệt dữ liệu phản hồi."
+      },
+      {
+        part: "SLIDE 11 · LIVE DEMONSTRATION",
+        title: "Slide 11: Kịch bản Trình diễn Trực tiếp (Live Demonstration)",
+        subtitle: "Kiểm chứng thực tế trên Dashboard Học thuật Gradio, Cổng báo giả lập và Báo điện tử Việt Nam",
+        bullets: [
+          "<b>Kịch bản 1 — Gradio XAI Hub (<code>http://127.0.0.1:7860</code>):</b> Phân tích bài báo mẫu & dán URL báo thật; quan sát bảng xác suất của từng mô hình thành phần, tô màu từ khóa XAI (Local Attribution) và kết quả Tháo tít.",
+          "<b>Kịch bản 2 — Cổng Báo Giả lập (<code>/demo-news</code>):</b> Kiểm증 Tầng 1 (Hover đọc Sapo, nút Tháo tít ngay trên thẻ bài) và Tầng 2 (Thanh Reading Assistant Pill ở góc dưới phải).",
+          "<b>Kịch bản 3 — Trải nghiệm trên Báo thật (VnExpress, Kênh14, Bongdaplus...):</b> Bật chế độ <i>“Tự động làm mờ (Blur) tin giật tít”</i> trên Popup Tầng 3 và kiểm tra khả năng tự chuyển sang <code>Local ML Fallback</code> khi tắt Backend."
+        ],
+        kpi: [
+          { val: "127.0.0.1:7860", lbl: "Gradio XAI & URL Analyzer" },
+          { val: "/demo-news", lbl: "Trang Báo Giả lập Kiểm thử" },
+          { val: "Online & Offline", lbl: "Kiểm chứng Fallback trực tiếp" }
+        ],
+        visualHtml: `
+          <div style="padding:20px;text-align:center;">
+            <div style="font-size:44px;margin-bottom:10px;">🚀</div>
+            <div style="font-size:18px;font-weight:800;color:#fff;margin-bottom:8px;">TRÌNH DIỄN HỆ THỐNG TRỰC TIẾP</div>
+            <p style="font-size:13.5px;color:#94a3b8;margin-bottom:16px;">Mở trực tiếp các giao diện thực nghiệm của dự án:</p>
+            <div style="display:flex;gap:12px;justify-content:center;">
+              <a href="http://127.0.0.1:7860" target="_blank" style="background:#2563eb;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13.5px;">↗ Mở Gradio XAI Hub (:7860)</a>
+              <a href="http://127.0.0.1:7860/demo-news" target="_blank" style="background:#059669;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13.5px;">📰 Mở Cổng Báo (/demo-news)</a>
+            </div>
+          </div>
+        `,
+        note: "Thông điệp: Chứng minh hệ thống hoạt động mượt mà từ phân tích học thuật chuyên sâu trên Gradio đến quét thời gian thực trên các báo điện tử."
+      },
+      {
+        part: "SLIDE 12 · CONCLUSION & FUTURE WORK",
+        title: "Slide 12: Kết luận, Hạn chế Thực tế & Hướng Phát triển",
+        subtitle: "Tổng kết đóng góp toàn diện và lộ trình nâng cấp dựa trên phân tích lỗi thực nghiệm",
+        bullets: [
+          "<b>Đóng góp chính:</b> (1) Chuẩn hóa tập dữ liệu 3,414 bài báo tiếng Việt, khử lỗi dính địa danh VnExpress (163 mẫu) & đuôi Báo Mới (716 mẫu); (2) Chứng minh vai trò của <code>Title + Sapo + 12 Hand-crafted</code> qua Ablation Study (+2.18% Macro-F1); (3) Xây dựng hệ thống XAI + De-clickbait & Chrome Extension 3 tầng.",
+          "<b>Hạn chế thực tế:</b> (1) Các trang chủ báo chỉ hiển thị tiêu đề không kèm Sapo khiến độ chính xác giảm về mức cấu hình <code>Only Title</code> (~78.95%); (2) Các câu giật tít ẩn dụ sâu (<i>Curiosity Gap</i> không dùng từ khóa cảm thán) vẫn gây False Negative; (3) Hiện tượng các báo đăng lại cùng bản tin cần kiểm chứng thêm bằng <b>Source Holdout</b>.",
+          "<b>Hướng phát triển:</b> Bổ sung đánh giá chéo theo nguồn báo (<i>Leave-One-Source-Out</i>), tích hợp cơ chế tiền tải ngầm Sapo ở trang chủ và tinh chỉnh mô hình ngôn ngữ nhỏ cho tác vụ viết lại tiêu đề."
+        ],
+        kpi: [
+          { val: "4 Đóng góp", lbl: "Data · Model · XAI · Extension" },
+          { val: "3 Hạn chế", lbl: "Phân tích thẳng thắn từ thực nghiệm" },
+          { val: "Q & A", lbl: "Cảm ơn & Lắng nghe Hội đồng" }
+        ],
+        visualHtml: `
+          <div style="padding:24px;text-align:center;">
+            <div style="font-size:42px;margin-bottom:10px;">🛡️🇻🇳</div>
+            <div style="font-size:21px;font-weight:800;color:#4ade80;margin-bottom:8px;">CẢM ƠN THẦY CÔ & HỘI ĐỒNG ĐÃ LẮNG NGHE!</div>
+            <div style="font-size:13.5px;color:#cbd5e1;line-height:1.6;">
+              Toàn bộ mã nguồn, trọng số mô hình, dữ liệu kiểm thử và Chrome Extension<br>đã sẵn sàng phục vụ kiểm tra và phản biện trực tiếp.
+            </div>
+          </div>
+        `,
+        note: "Thông điệp: Tổng kết trung thực kết quả đạt được, nhìn nhận thẳng thắn các hạn chế học thuật và đề xuất hướng giải quyết trực tiếp."
+      }
+    ];
+
+    let idx = 0;
+    const hdrPart = document.getElementById("hdr-part");
+    const hdrCount = document.getElementById("hdr-count");
+    const hdrPills = document.getElementById("hdr-pills");
+    const stage = document.getElementById("stage");
+    const ftrNote = document.getElementById("ftr-note");
+    const btnPrev = document.getElementById("btn-prev");
+    const btnNext = document.getElementById("btn-next");
+
+    function render() {
+      const s = SLIDES[idx];
+      hdrPart.textContent = s.part;
+      hdrCount.textContent = `Slide ${idx + 1} / ${SLIDES.length}`;
+      ftrNote.textContent = `🎤 Gợi ý thuyết trình: ${s.note}`;
+
+      hdrPills.innerHTML = "";
+      SLIDES.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.className = `pill-btn ${i === idx ? "active" : ""}`;
+        b.textContent = i + 1;
+        b.onclick = () => { idx = i; render(); };
+        hdrPills.appendChild(b);
+      });
+
+      const bullets = s.bullets.map(item => `<li>${item}</li>`).join("");
+      const kpis = s.kpi
+        .map(k => `<div class="kpi-box"><div class="kpi-val">${k.val}</div><div class="kpi-lbl">${k.lbl}</div></div>`)
+        .join("");
+
+      let rightContent = "";
+      if (s.img) {
+        rightContent = `
+          <div class="visual-panel">
+            <img src="${s.img}" alt="Slide chart" />
+            <div class="visual-caption">${s.caption || ""}</div>
+          </div>
+        `;
+      } else if (s.visualHtml) {
+        rightContent = `<div class="visual-panel">${s.visualHtml}</div>`;
+      }
+
+      stage.innerHTML = `
+        <div class="slide-title">${s.title}</div>
+        <div class="slide-subtitle">${s.subtitle}</div>
+        <div class="slide-grid ${rightContent ? "" : "full"}">
+          <div class="card-panel">
+            <ul class="bullet-list">${bullets}</ul>
+            <div class="kpi-row">${kpis}</div>
+          </div>
+          ${rightContent}
+        </div>
+      `;
+
+      btnPrev.disabled = idx === 0;
+      btnPrev.style.opacity = idx === 0 ? "0.4" : "1";
+      btnNext.disabled = idx === SLIDES.length - 1;
+      btnNext.style.opacity = idx === SLIDES.length - 1 ? "0.4" : "1";
+    }
+
+    btnPrev.onclick = () => { if (idx > 0) { idx--; render(); } };
+    btnNext.onclick = () => { if (idx < SLIDES.length - 1) { idx++; render(); } };
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " ") btnNext.click();
+      if (e.key === "ArrowLeft") btnPrev.click();
+      if (e.key.toLowerCase() === "f") toggleFullScreen();
+    });
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    render();
+  </script>
+</body>
+</html>

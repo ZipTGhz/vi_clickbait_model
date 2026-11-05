@@ -134,13 +134,13 @@ async function predictLocalSingle(title, leadParagraph = "", sensitivity = 0.50)
   const isClickbait = prob >= sensitivity;
 
   let badgeLevel = "green";
-  let badgeText = "Tin chuẩn";
-  let verdictVi = "TIN TỨC CHÍNH THỐNG / KHÁCH QUAN";
+  let badgeText = "Không giật tít";
+  let verdictVi = "TIN KHÔNG GIẬT TÍT";
 
   if (prob >= Math.max(sensitivity + 0.12, 0.62)) {
     badgeLevel = "red";
     badgeText = `Giật tít · ${Math.round(prob * 100)}%`;
-    verdictVi = "BÀI VIẾT GIẬT TÍT / CÂU VIEW CAO";
+    verdictVi = "TIN GIẬT TÍT / CÂU VIEW CAO";
   } else if (prob >= Math.max(sensitivity - 0.10, 0.40)) {
     badgeLevel = "yellow";
     badgeText = `Chú ý · ${Math.round(prob * 100)}%`;

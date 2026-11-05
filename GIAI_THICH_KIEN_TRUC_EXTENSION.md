@@ -137,7 +137,7 @@ Khi server hoạt động, `background.js` gọi API `POST /api/predict_batch`. 
 ### 3.3. Quy tắc Phân cấp Nhãn Tín hiệu (Traffic-Light Badge)
 * $\text{Xác suất} \ge 62\%$: 🔴 **Giật tít cao** (`badge_level: "red"`) — Kèm tỷ lệ % và gợi ý tháo tít.
 * $40\% \le \text{Xác suất} < 62\%$: 🟡 **Chú ý** (`badge_level: "yellow"`) — Tiêu đề có yếu tố gây tò mò / giấu thông tin nhẹ.
-* $\text{Xác suất} < 40\%$: 🟢 **Tin chuẩn** (`badge_level: "green"`) — Bài viết chính thống, khách quan.
+* $\text{Xác suất} < 40\%$: 🟢 **Không giật tít** (`badge_level: "green"`) — Bài viết không giật tít, khách quan.
 
 ---
 

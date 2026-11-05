@@ -423,7 +423,7 @@ def build_extension_simulator_html(blur_mode: bool = False, sensitivity: float =
             <div style="background:#1e293b;padding:12px 14px;border-radius:10px;border:1px solid #334155;margin-bottom:14px;font-size:13px;">
                 <div style="font-weight:700;margin-bottom:6px;color:#e2e8f0;">📊 Độ sạch trang hiện tại</div>
                 <div style="display:flex;justify-content:space-between;color:#cbd5e1;font-size:12.5px;">
-                    <span>Tỷ lệ tin chuẩn:</span>
+                    <span>Tỷ lệ tin không giật tít:</span>
                     <b style="color:#4ade80;">{int((4 - cb_count) / 4 * 100)}% ({4 - cb_count}/4 bài)</b>
                 </div>
                 <div style="display:flex;justify-content:space-between;color:#cbd5e1;font-size:12.5px;margin-top:4px;">
@@ -538,7 +538,7 @@ with gr.Blocks(title="VN Anti-Clickbait AI — Demo & Extension Hub") as gradio_
                     analyze_btn = gr.Button("🚀 Phân tích & Giải thích Ngay", variant="primary", size="lg")
 
                     gr.Examples(
-                        label="💡 Nhấp chọn nhanh các mẫu bài báo thực tế (Clickbait vs Chính thống & Khử nhiễu VnExpress/Báo Mới):",
+                        label="💡 Nhấp chọn nhanh các mẫu bài báo thực tế (Giật tít vs Không giật tít & Khử nhiễu VnExpress/Báo Mới):",
                         examples=DEMO_EXAMPLES,
                         inputs=[title_input, lead_input, model_dropdown, sensitivity_slider],
                     )
@@ -554,7 +554,7 @@ with gr.Blocks(title="VN Anti-Clickbait AI — Demo & Extension Hub") as gradio_
                         color_map={
                             "Giật tít mạnh": "#ef4444",
                             "Gợi tò mò": "#f59e0b",
-                            "Chính thống": "#10b981",
+                            "Không giật tít": "#10b981",
                         },
                     )
 

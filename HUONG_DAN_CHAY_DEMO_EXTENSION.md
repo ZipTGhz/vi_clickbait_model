@@ -7,13 +7,26 @@ Tài liệu này hướng dẫn chi tiết cách khởi động **Web Demo Gradi
 
 ## 1. Yêu cầu Môi trường & Cài đặt (Chỉ cần làm lần đầu)
 
-Dự án đã có sẵn môi trường ảo `venv` và file cấu hình `requirements.txt`. Nếu bạn chạy trên máy mới hoặc cần cài đặt lại:
+Dự án hỗ trợ đầy đủ cả **Windows** và **Linux / macOS**:
 
-```bash
-# 1. Kích hoạt môi trường ảo venv (Windows)
+### Trên Windows (PowerShell / CMD):
+```powershell
+# 1. Tạo và kích hoạt môi trường ảo venv
+python -m venv venv
 venv\Scripts\activate
 
 # 2. Cài đặt các thư viện phụ thuộc
+pip install -r requirements.txt
+```
+
+### Trên Linux / macOS (Terminal):
+```bash
+# 1. Tạo và kích hoạt môi trường ảo venv
+python3 -m venv venv
+source venv/bin/activate
+
+# 2. Cài đặt các thư viện phụ thuộc
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
@@ -27,15 +40,12 @@ Server backend điều phối đồng thời:
 * **Cổng báo điện tử giả lập** (`/demo-news`) để kiểm thử Extension.
 
 ### Cách khởi động:
-* **Cách 1 (Nhanh nhất - 1 Click chuột)**:
-  * Nhấp đúp chuột (Double click) vào file: **`start_app.bat`**
-  * Cửa sổ dòng lệnh sẽ tự động kích hoạt `venv` và mở server tại cổng `7860`.
-* **Cách 2 (Bằng Terminal / PowerShell)**:
-  ```powershell
-  cd D:\Work_Study\Coding\Github\vi_clickbait_model
-  .\venv\Scripts\activate
-  python app.py
-  ```
+* **Trên Windows**:
+  * **1 Click chuột**: Nhấp đúp chuột vào file **`start_app.bat`**.
+  * **Hoặc dùng Terminal**: `venv\Scripts\activate` $\rightarrow$ `python app.py`
+* **Trên Linux / macOS**:
+  * **Dùng script**: `chmod +x start_app.sh stop_app.sh && ./start_app.sh`
+  * **Hoặc dùng Terminal**: `source venv/bin/activate` $\rightarrow$ `python3 app.py`
 
 Sau khi khởi chạy thành công, màn hình sẽ thông báo:
 ```text
@@ -46,7 +56,7 @@ Sau khi khởi chạy thành công, màn hình sẽ thông báo:
 
 ### Cách tắt Server khi không dùng nữa:
 * **Cách 1**: Nhấp vào cửa sổ dòng lệnh đang chạy và bấm tổ hợp phím **`Ctrl + C`** (hoặc bấm dấu **`X`** để đóng cửa sổ).
-* **Cách 2 (1 Click chuột)**: Nhấp đúp chuột vào file **`stop_app.bat`**, script sẽ tự động tìm và ngắt tiến trình đang chạy trên cổng `7860`.
+* **Cách 2**: Chạy **`stop_app.bat`** (Windows) hoặc **`./stop_app.sh`** (Linux/macOS), script sẽ tự động tìm và ngắt tiến trình đang chạy trên cổng `7860`.
 
 ---
 
@@ -65,8 +75,8 @@ Giao diện gồm **3 Tab chuyên sâu**:
    * Chọn một trong 5 mô hình: `Ensemble (Khuyên dùng)`, `TF-IDF + Linear SVM`, `TF-IDF + Logistic Regression`, `BiLSTM`, `TextCNN`.
    * Kéo thanh trượt **Ngưỡng nhạy Clickbait** (mặc định 0.50).
 3. **Kết quả hiển thị**:
-   * **Thẻ Kết luận Trực quan**: Nhãn màu (🟢 Tin chuẩn / 🟡 Chú ý / 🔴 Giật tít), thanh đo xác suất Clickbait (%), lý do giải thích bằng ngôn ngữ tự nhiên, các từ khóa kích thích tò mò và **✨ Gợi ý Tháo tít** (tiêu đề trung lập chuẩn báo chí).
-   * **Tô màu Từ khóa (Token-level XAI Attribution)**: Đánh dấu các từ ngữ theo 3 cấp độ: *Giật tít mạnh* (đỏ), *Gợi tò mò* (vàng), *Chính thống* (xanh).
+   * **Thẻ Kết luận Trực quan**: Nhãn màu (🟢 Không giật tít / 🟡 Chú ý / 🔴 Giật tít), thanh đo xác suất Clickbait (%), lý do giải thích bằng ngôn ngữ tự nhiên, các từ khóa kích thích tò mò và **✨ Gợi ý Tháo tít** (tiêu đề trung lập chuẩn báo chí).
+   * **Tô màu Từ khóa (Token-level XAI Attribution)**: Đánh dấu các từ ngữ theo 3 cấp độ: *Giật tít mạnh* (đỏ), *Gợi tò mò* (vàng), *Không giật tít* (xanh).
    * **Chi tiết Kỹ thuật**: So sánh điểm số giữa 5 mô hình, bảng 12 đặc trưng thủ công (Hand-crafted features) và trạng thái khử nhiễu đặc thù (*khử lỗi dính địa danh VnExpress*, *cắt bỏ đuôi tên báo Báo Mới*).
 
 ### Tab 2: 🧩 Trải nghiệm Giao diện Chrome Extension (UX 3 Tầng)
@@ -106,7 +116,7 @@ Sau khi cài đặt xong, bạn có thể kiểm thử ngay theo 2 cách:
 Truy cập: **`http://127.0.0.1:7860/demo-news`**
 * Trang web này mô phỏng giao diện của một tờ báo điện tử với đầy đủ các thể loại tin (giải trí câu view, tài chính vĩ mô, sức khỏe giật gân, giao thông chính thống...).
 * Bạn sẽ thấy:
-  1. **Tầng 1 (In-Page Ambient Badges)**: Cạnh mỗi tiêu đề xuất hiện ngay nhãn **🟢 Tin chuẩn**, **🟡 Chú ý · xx%**, hoặc **🔴 Giật tít · xx%**.
+  1. **Tầng 1 (In-Page Ambient Badges)**: Cạnh mỗi tiêu đề xuất hiện ngay nhãn **🟢 Không giật tít**, **🟡 Chú ý · xx%**, hoặc **🔴 Giật tít · xx%**.
      * Rê chuột vào nhãn đỏ: Một khung màu tối sang trọng hiện ra, hiển thị từ khóa kích động (*"bí ẩn"*, *"xôn xao"*, *"cái kết đắng"*...), lý do nhận diện và **💡 Tóm tắt Sapo** (giúp bạn nắm luôn nội dung thật mà **không cần bấm click vào bài báo**).
      * Bấm nút **"✨ Tháo tít trên trang"**: Tiêu đề giật gân trên bài viết sẽ lập tức đổi thành tiêu đề khách quan, chuẩn mực!
   2. **Tầng 2 (Reading Assistant Floating Pill)**: Nhấp vào bất kỳ bài báo nào để xem ở cột bên phải (Chế độ đọc chi tiết).
@@ -121,6 +131,7 @@ Mở các website báo chí tiếng Việt thông dụng:
 * `https://tuoitre.vn`
 * `https://baomoi.com`
 * `https://dantri.com.vn`
+* `https://bongdaplus.vn`
 
 Extension sẽ tự động quét danh sách bài báo trên trang và gắn nhãn trực tiếp mà không làm chậm hay vỡ giao diện của báo.
 
@@ -129,7 +140,7 @@ Extension sẽ tự động quét danh sách bài báo trên trang và gắn nh�
 ### Bước 3: Sử dụng Bảng điều khiển Extension Popup (Tầng 3)
 Nhấp vào icon **🛡️ VN Anti-Clickbait** trên thanh công cụ trình duyệt:
 * **Xem hiệu quả bảo vệ**: Thống kê số lượng bài giật tít đã cảnh báo và số phút đọc tin bạn đã tiết kiệm được.
-* **Độ sạch trang hiện tại**: Cho biết trang web bạn đang xem có bao nhiêu % tin chuẩn, bao nhiêu bài giật gân.
+* **Độ sạch trang hiện tại**: Cho biết trang web bạn đang xem có bao nhiêu % tin không giật tít, bao nhiêu bài giật tít.
 * **Chế độ Làm mờ (Blur)**: Bật công tắc *"Tự động làm mờ tít câu view"*, các tiêu đề giật tít trên trang báo sẽ lập tức bị mờ đi. Rê chuột vào tiêu đề nào thì tiêu đề đó mới hiện rõ lại.
 * **Thanh trượt Độ nhạy**: Điều chỉnh giữa *Nghiêm ngặt (35%)* — *Cân bằng (50%)* — *Thoải mái (70%)*.
 * **Tab Kiểm tra nhanh (Quick Check)**: Cho phép bạn dán nhanh bất kỳ câu tiêu đề nào vào để kiểm tra xác suất giật tít và nhận gợi ý tháo tít ngay lập tức.

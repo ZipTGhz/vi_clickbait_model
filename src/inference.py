@@ -499,15 +499,15 @@ class ClickbaitInferenceEngine:
         if primary_prob >= max(sensitivity + 0.12, 0.62):
             badge_level = "red"
             badge_text = f"Giật tít · {int(round(primary_prob * 100))}%"
-            verdict_vi = "BÀI VIẾT GIẬT TÍT / CÂU VIEW CAO"
+            verdict_vi = "TIN GIẬT TÍT / CÂU VIEW CAO"
         elif primary_prob >= max(sensitivity - 0.10, 0.40):
             badge_level = "yellow"
             badge_text = f"Chú ý · {int(round(primary_prob * 100))}%"
             verdict_vi = "TIÊU ĐỀ CÓ YẾU TỐ GÂY TÒ MÒ / CẢM XÚC"
         else:
             badge_level = "green"
-            badge_text = "Tin chuẩn"
-            verdict_vi = "TIN TỨC CHÍNH THỐNG / KHÁCH QUAN"
+            badge_text = "Không giật tít"
+            verdict_vi = "TIN KHÔNG GIẬT TÍT"
 
         # Phân tích đóng góp của từng từ/cụm từ trong tiêu đề & sapo (XAI HighlightedText)
         token_highlights, trigger_words, orthodox_words = self._analyze_tokens(title_seg, lead_seg)
@@ -643,7 +643,7 @@ class ClickbaitInferenceEngine:
             elif effective_w >= 0.28:
                 tag = "Gợi tò mò"
             elif effective_w <= -0.45:
-                tag = "Chính thống"
+                tag = "Không giật tít"
             else:
                 tag = None
 
