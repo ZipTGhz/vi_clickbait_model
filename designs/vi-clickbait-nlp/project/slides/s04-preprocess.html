@@ -1,0 +1,28 @@
+<section id="s04-preprocess" data-transition="fade" style="background:#F2EFE9;color:#14213D;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:700;color:#C85A17;text-transform:uppercase">PHẦN II · TIỀN XỬ LÝ VĂN BẢN ĐẶC THÙ TIẾNG VIỆT (SRC/PREPROCESS.PY)</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:52px;font-weight:700;line-height:1.12;color:#14213D">Khử Nhiễu Cào Dữ liệu Thực tế &amp; Chuẩn hóa Tiếng Việt</h2>
+</div>
+<div style="display:flex;gap:32px;align-items:stretch">
+<div style="flex:6;display:flex;flex-direction:column;justify-content:space-between;gap:18px">
+<div style="background:#FBFBF8;border:1px solid #DCD7CD;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#1D5B9B">1. Tách địa danh dính đầu Sapo VnExpress (163 mẫu)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36">Dùng Regex tách <i>“Nghệ AnCảng hàng không…”</i> thành <i>“Nghệ An Cảng hàng không…”</i> kết hợp Whitelist bảo toàn <b>35 thương hiệu CamelCase</b> (<b>TikTok, iPhone, VinFast, ChatGPT…</b>).</p>
+</div>
+<div style="background:#FBFBF8;border:1px solid #DCD7CD;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#C85A17">2. Cắt hậu tố tên báo Báo Mới (716 mẫu) &amp; Điền khuyết (3 mẫu)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36">Xóa sạch phần đuôi <i>“… - Tạp chí SaoStar”</i>, <i>“… - Báo…”</i> ở cuối tiêu đề; điền chuỗi rỗng cho 3 mẫu thiếu Sapo để tránh lỗi NaN.</p>
+</div>
+<div style="background:#FBFBF8;border:1px solid #DCD7CD;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#14213D">3. Chuẩn hóa Unicode NFC, Dấu thanh &amp; Tách từ PyVi</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36">Đưa về <b>Unicode NFC</b> (đồng nhất mã byte dựng sẵn), chuẩn hóa riêng quy tắc đặt dấu thanh (<b>oà → òa, uỳ → ùy</b>) và tách từ ghép bằng <b>PyVi ViTokenizer</b> (<b>bất_ngờ, tiết_lộ</b>).</p>
+</div>
+</div>
+<div style="flex:5;background:#FBFBF8;border:1px solid #DCD7CD;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:12px">
+<img src="/_blob/6d30f102be09654422ce236d378d983e" alt="Phân phối độ dài từ của Tiêu đề và Đoạn mở đầu Sapo" style="width:580px;height:420px;object-fit:contain;border-radius:8px">
+<p style="font-size:24px;font-weight:600;color:#3D4856;text-align:center">Độ dài trung bình: Title ~14 từ · Sapo ~35 từ</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#5C6777">Slide 04 / 12 · Khử 163 lỗi dính địa danh VnExpress, 716 hậu tố Báo Mới, chuẩn hóa NFC &amp; PyVi</p>
+<aside>Giải thích 2 lỗi nhiễu đặc thù từ VnExpress (163 mẫu) và Báo Mới (716 mẫu), đồng thời phân biệt rõ chuẩn hóa mã Unicode NFC với chuẩn hóa vị trí đặt dấu thanh tiếng Việt.</aside>
+</section>

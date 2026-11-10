@@ -124,6 +124,11 @@ class ClickbaitInferenceEngine:
         self.textcnn_model: Optional[TextCNNClassifier] = None
         self.dl_max_len: int = 128
 
+        # Thành phần Transformer (PhoBERT-base-v2)
+        self.phobert_bundle: Optional[Dict[str, Any]] = None
+        self.phobert_tokenizer = None
+        self.phobert_backbone = None
+
         # Dữ liệu thống kê & Benchmark
         self.benchmarks: List[Dict[str, Any]] = []
         self.eda_stats: Dict[str, Any] = {}
@@ -234,8 +239,82 @@ class ClickbaitInferenceEngine:
             self.textcnn_model.load_state_dict(state_dict)
             self.textcnn_model.eval()
 
+        # 2b. Nạp gói phân loại PhoBERT-base-v2 nếu có
+        phobert_head_path = os.path.join(self.results_dir, "phobert_best_checkpoint", "phobert_head.joblib")
+        if os.path.exists(phobert_head_path):
+            try:
+                self.phobert_bundle = joblib.load(phobert_head_path)
+            except Exception as e:
+                print(f"[ENGINE] Không thể đọc phobert_head.joblib: {e}")
+
         # 3. Tính toán hoặc nạp bảng Benchmark trên tập Test
         self._load_or_compute_benchmarks()
+
+    def _ensure_phobert_loaded(self) -> bool:
+        """Nạp lười (lazy-load) PhobertTokenizer & RobertaModel từ cache cục bộ khi cần suy diễn."""
+        if self.phobert_bundle is None:
+            return False
+        if self.phobert_backbone is not None and self.phobert_tokenizer is not None:
+            return True
+
+        try:
+            from transformers import PhobertTokenizer, RobertaConfig, RobertaModel
+
+            blob_dir = os.path.expanduser("~/.cache/huggingface/hub/models--vinai--phobert-base-v2/blobs")
+            vocab_file = os.path.join(blob_dir, "0dbdec11459dd9d1f6e985bf6c58dbcf6adaeabd")
+            merges_file = os.path.join(blob_dir, "b9a70c1a314ef0c6d97dffd98b34a1c60b988a6e")
+            config_file = os.path.join(blob_dir, "e800588c3293ac52317fecd3cec98e36cdfcfae8")
+            weights_file = os.path.join(blob_dir, "7ba09eb4c244a5b3a49ad76d52d129ac085b61f5c6287de7f99508b02be589f9")
+
+            if os.path.exists(vocab_file) and os.path.exists(weights_file):
+                self.phobert_tokenizer = PhobertTokenizer(vocab_file=vocab_file, merges_file=merges_file)
+                config = RobertaConfig.from_json_file(config_file)
+                backbone = RobertaModel(config, add_pooling_layer=False)
+                sd = torch.load(weights_file, map_location="cpu", weights_only=False)
+                cleaned_sd = {
+                    (k.replace("roberta.", "") if k.startswith("roberta.") else k): v
+                    for k, v in sd.items()
+                }
+                backbone.load_state_dict(cleaned_sd, strict=False)
+                self.phobert_backbone = backbone.to(self.device).eval()
+                return True
+        except Exception as e:
+            print(f"[ENGINE] Không thể khởi tạo PhoBERT backbone: {e}")
+        return False
+
+    def _predict_phobert_single(self, title_seg: str, lead_seg: str, hc_raw_vals: np.ndarray) -> Optional[float]:
+        """Suy diễn xác suất Clickbait bằng PhoBERT-base-v2 trên 1 mẫu bài báo."""
+        if not self._ensure_phobert_loaded():
+            return None
+        try:
+            max_len = int(self.phobert_bundle.get("max_length", 96))
+            if lead_seg:
+                enc = self.phobert_tokenizer(
+                    [title_seg], [lead_seg],
+                    truncation=True, padding=True, max_length=max_len, return_tensors="pt"
+                )
+            else:
+                enc = self.phobert_tokenizer(
+                    [title_seg],
+                    truncation=True, padding=True, max_length=max_len, return_tensors="pt"
+                )
+            input_ids = enc["input_ids"].to(self.device)
+            attention_mask = enc["attention_mask"].to(self.device)
+            with torch.inference_mode():
+                outputs = self.phobert_backbone(input_ids=input_ids, attention_mask=attention_mask)
+                hidden = outputs.last_hidden_state
+                cls_vec = hidden[:, 0, :]
+                mask = attention_mask.unsqueeze(-1).float()
+                mean_vec = (hidden * mask).sum(dim=1) / torch.clamp(mask.sum(dim=1), min=1e-9)
+                emb = torch.cat([cls_vec, mean_vec], dim=-1).cpu().numpy()
+
+            hc_scaled = self.phobert_bundle["hc_scaler"].transform(hc_raw_vals)
+            feat_scaled = self.phobert_bundle["scaler"].transform(np.hstack([emb, hc_scaled]))
+            prob = float(self.phobert_bundle["clf_head"].predict_proba(feat_scaled)[0, 1])
+            return prob
+        except Exception as e:
+            print(f"[ENGINE] Lỗi suy diễn PhoBERT: {e}")
+            return None
 
     def _build_token_weight_map(self) -> None:
         """Tổng hợp trọng số đặc trưng từ Linear SVM và Logistic Regression cho giải thích XAI."""
@@ -411,6 +490,7 @@ class ClickbaitInferenceEngine:
         lead_paragraph: str = "",
         model_choice: str = "Ensemble (Khuyên dùng)",
         sensitivity: float = 0.50,
+        include_phobert: bool = True,
     ) -> Dict[str, Any]:
         """
         Phân tích toàn diện một bài báo từ tiêu đề (`title`) và đoạn mở đầu (`lead_paragraph`).
@@ -470,6 +550,10 @@ class ClickbaitInferenceEngine:
 
         ensemble_prob = 0.35 * svm_prob + 0.20 * lr_prob + 0.22 * bilstm_prob + 0.23 * textcnn_prob
 
+        phobert_prob: Optional[float] = None
+        if include_phobert or "PhoBERT" in model_choice:
+            phobert_prob = self._predict_phobert_single(title_seg, lead_seg, hc_raw_vals)
+
         model_scores = {
             "Ensemble (Đa mô hình)": round(ensemble_prob, 4),
             "TF-IDF + Linear SVM": round(svm_prob, 4),
@@ -477,10 +561,15 @@ class ClickbaitInferenceEngine:
             "BiLSTM (Deep Learning)": round(bilstm_prob, 4),
             "TextCNN (Deep Learning)": round(textcnn_prob, 4),
         }
+        if phobert_prob is not None:
+            model_scores["PhoBERT-base-v2 (Transformer)"] = round(phobert_prob, 4)
 
         # Chọn điểm xác suất chính theo model_choice
         choice_key = model_choice
-        if "SVM" in model_choice:
+        if "PhoBERT" in model_choice and phobert_prob is not None:
+            primary_prob = phobert_prob
+            choice_key = "PhoBERT-base-v2 (Transformer)"
+        elif "SVM" in model_choice:
             primary_prob = svm_prob
         elif "Logistic" in model_choice:
             primary_prob = lr_prob
@@ -586,6 +675,7 @@ class ClickbaitInferenceEngine:
                 lead_paragraph=lead,
                 model_choice="Ensemble (Khuyên dùng)",
                 sensitivity=sensitivity,
+                include_phobert=False,
             )
             results.append({
                 "id": item_id,

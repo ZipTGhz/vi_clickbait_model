@@ -1,0 +1,26 @@
+<section id="s06-models" data-transition="fade" style="background:#F2EFE9;color:#14213D;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:28px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;font-weight:700;color:#C85A17;text-transform:uppercase">PHẦN II · KIẾN TRÚC CÁC NHÓM MÔ HÌNH &amp; CƠ CHẾ TỔ HỢP</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:50px;font-weight:700;line-height:1.12;color:#14213D">Kiến trúc ML, Deep Learning, PhoBERT &amp; Hybrid Ensemble</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:#FBFBF8;border:1px solid #DCD7CD;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:28px;font-weight:700;color:#1D5B9B">1. Nhóm Học máy Truyền thống (Scikit-learn)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36"><b>MultinomialNB</b> (alpha=0.5) · <b>Logistic Regression</b> (C=1.5, balanced) · <b>LinearSVC</b> (C=0.8, balanced) bọc trong <b>CalibratedClassifierCV (5-fold)</b> để xuất xác suất Platt Scaling · <b>Random Forest</b> (300 cây).</p>
+</div>
+<div style="background:#FBFBF8;border:1px solid #DCD7CD;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:28px;font-weight:700;color:#C85A17">2. Nhóm Học sâu PyTorch (BiLSTM &amp; TextCNN)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36">Từ điển 15,000 từ (max_len=128), Embedding(128) → SpatialDropout1D(0.2) → <b>BiLSTM (64×2, Masked MaxPool)</b> hoặc <b>TextCNN (filters=[2,3,5], 64 kênh)</b> ghép nối với nhánh Linear(12→16) của 12 đặc trưng thủ công.</p>
+</div>
+<div style="background:#FBFBF8;border:1px solid #DCD7CD;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:28px;font-weight:700;color:#14213D">3. Transformer PhoBERT-base-v2 (Pre-trained)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36">Trích xuất biểu diễn ngữ cảnh <b>[CLS] + Mean-Pool (1536 chiều)</b> từ <b>vinai/phobert-base-v2</b> kết hợp 12 đặc trưng HC. Đạt <b>ROC-AUC 87.32%</b>, <b>F1(CB) 71.95%</b> cao nhất, tích hợp trong Demo Gradio (độ trễ CPU <b>71.93 ms/mẫu</b>).</p>
+</div>
+<div style="background:#14213D;color:#FBFBF8;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:28px;font-weight:700;color:#F6AD55">4. Soft-Voting Hybrid Ensemble (Quét Thời gian thực)</h3>
+<p style="font-size:24px;color:#E6EEF6;line-height:1.36">Kết hợp xác suất: <b>0.35 · P(SVM) + 0.20 · P(LR) + 0.22 · P(BiLSTM) + 0.23 · P(TextCNN)</b>. Đạt <b>ROC-AUC 86.41%</b> với độ trễ chỉ <b>0.523 ms/mẫu</b> trên CPU (nhanh gấp <b>138 lần</b> PhoBERT khi quét trang báo).</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#5C6777">Slide 06 / 12 · Hỗ trợ cả PhoBERT-base-v2 (phân tích sâu 1 bài) và Hybrid Ensemble (quét hàng loạt 0.523 ms/mẫu)</p>
+<aside>Trình bày cấu trúc 4 nhóm mô hình trong dự án và giải thích lý do lựa chọn tổ hợp Soft-Voting 4 mô hình (0.523 ms/mẫu) thay vì PhoBERT khi quét hàng loạt tiêu đề.</aside>
+</section>

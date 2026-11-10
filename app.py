@@ -325,7 +325,7 @@ def build_extension_simulator_html(blur_mode: bool = False, sensitivity: float =
     cards_html = ""
     cb_count = 0
     for art in sample_feed:
-        pred = ENGINE.predict_single(art["title"], art["lead"], sensitivity=sensitivity)
+        pred = ENGINE.predict_single(art["title"], art["lead"], sensitivity=sensitivity, include_phobert=False)
         lvl = pred["badge_level"]
         if pred["is_clickbait"]:
             cb_count += 1
@@ -471,7 +471,7 @@ with gr.Blocks(title="VN Anti-Clickbait AI — Demo & Extension Hub") as gradio_
                         Hệ thống Phát hiện & Giải thích Tin Giật Tít Tiếng Việt
                     </h1>
                     <p style="margin:6px 0 0 0;color:#cbd5e1;font-size:14.5px;">
-                        Kết hợp đặc trưng ngôn ngữ từ <b>Tiêu đề (Title)</b> và <b>Đoạn mở đầu (Sapo)</b> · Hỗ trợ 5 mô hình ML/DL & API trực tiếp cho Chrome Extension
+                        Kết hợp đặc trưng ngôn ngữ từ <b>Tiêu đề (Title)</b> và <b>Đoạn mở đầu (Sapo)</b> · Hỗ trợ 6 mô hình ML/DL/Transformer (PhoBERT-base-v2) &amp; API trực tiếp cho Chrome Extension
                     </p>
                 </div>
                 <div style="display:flex;gap:10px;">
@@ -518,6 +518,7 @@ with gr.Blocks(title="VN Anti-Clickbait AI — Demo & Extension Hub") as gradio_
                             label="🤖 Chọn Mô hình Suy diễn",
                             choices=[
                                 "Ensemble (Khuyên dùng)",
+                                "PhoBERT-base-v2 (Transformer)",
                                 "TF-IDF + Linear SVM",
                                 "TF-IDF + Logistic Regression",
                                 "BiLSTM (Deep Learning)",
@@ -558,10 +559,10 @@ with gr.Blocks(title="VN Anti-Clickbait AI — Demo & Extension Hub") as gradio_
                         },
                     )
 
-                    with gr.Accordion("🔬 Chi tiết Kỹ thuật: Điểm số 5 Mô hình, Tiền xử lý & 12 Đặc trưng Thủ công", open=False):
+                    with gr.Accordion("🔬 Chi tiết Kỹ thuật: Điểm số 6 Mô hình (gồm PhoBERT), Tiền xử lý & 12 Đặc trưng Thủ công", open=False):
                         model_scores_output = gr.Label(
                             label="So sánh Xác suất Clickbait giữa các Mô hình",
-                            num_top_classes=5,
+                            num_top_classes=6,
                         )
                         prep_output = gr.HTML(label="Chi tiết Tiền xử lý Đặc thù")
                         hc_table_output = gr.Dataframe(
@@ -711,8 +712,8 @@ class FeedbackRequest(BaseModel):
 def api_health():
     return {
         "status": "ok",
-        "engine": "ClickbaitInferenceEngine (Ensemble SVM + LR + BiLSTM + TextCNN)",
-        "models_loaded": ["Linear SVM", "Logistic Regression", "BiLSTM", "TextCNN"],
+        "engine": "ClickbaitInferenceEngine (Ensemble SVM + LR + BiLSTM + TextCNN & PhoBERT-base-v2)",
+        "models_loaded": ["Linear SVM", "Logistic Regression", "BiLSTM", "TextCNN", "PhoBERT-base-v2"],
     }
 
 

@@ -1,0 +1,28 @@
+<section id="s03-dataset" data-transition="fade" style="background:#FBFBF8;color:#14213D;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:700;color:#1D5B9B;text-transform:uppercase">PHẦN I · DỮ LIỆU, THIÊN LỆCH NGUỒN TIN &amp; KIỂM SOÁT DATA LEAKAGE</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:52px;font-weight:700;line-height:1.12;color:#14213D">Tập Dữ liệu (3,414 mẫu) &amp; Chống Học vẹt Nguồn báo</h2>
+</div>
+<div style="display:flex;gap:32px;align-items:stretch">
+<div style="flex:6;display:flex;flex-direction:column;justify-content:space-between;gap:18px">
+<div style="background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#14213D">1. Chia tập Stratified 70 / 15 / 15 (random_state = 42)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36"><b>Train:</b> 2,389 mẫu (745 CB / 1,644 Non-CB) · <b>Validation:</b> 512 mẫu (160 CB / 352 Non-CB) · <b>Test:</b> 513 mẫu (160 CB / 353 Non-CB). Bảo toàn tỷ lệ 68.80% Không giật tít : 31.20% Giật tít.</p>
+</div>
+<div style="background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#C85A17">2. Thiên lệch Nguồn báo (Source Bias) &amp; Xóa cột Source</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36">Kênh14 (<b>76.92%</b> CB), SaoStar (<b>65.03%</b> CB) đối lập với VnExpress (<b>14.47%</b> CB). Loại bỏ hoàn toàn cột <b>source</b> và cắt hậu tố tên báo ngăn mô hình học tắt theo tên tòa soạn.</p>
+</div>
+<div style="background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#1D5B9B">3. Kiểm tra Trùng lặp &amp; Rò rỉ Ngầm (Implicit Leakage)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36">Phát hiện <b>39 bài trùng tiêu đề (1.14%)</b> trên toàn tập (13 tiêu đề giao thoa Train–Test do các báo đăng lại cùng bản tin). Đề xuất đánh giá bổ sung bằng <b>Source Holdout (Group Split)</b>.</p>
+</div>
+</div>
+<div style="flex:5;background:#FFFFFF;border:1px solid #DCD7CD;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:12px">
+<img src="/_blob/a204a73861ab9619608b539a829689a2" alt="Phân bố tỷ lệ Clickbait theo 8 nguồn báo và 13 chuyên mục" style="width:580px;height:420px;object-fit:contain;border-radius:8px">
+<p style="font-size:24px;font-weight:600;color:#3D4856;text-align:center">Phân bố tỷ lệ Giật tít theo 8 Nguồn báo và 13 Chuyên mục</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#5C6777">Slide 03 / 12 · Phân biệt loại bỏ cột source trực tiếp với kiểm soát trùng lặp văn bản (1.14%)</p>
+<aside>Phân tích sự thiên lệch nguồn tin giữa Kênh14 (76.92%) và VnExpress (14.47%), giải thích việc loại bỏ cột source và thống kê 39 bài trùng tiêu đề do đăng lại bản tin.</aside>
+</section>

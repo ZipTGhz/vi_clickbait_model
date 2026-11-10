@@ -1,0 +1,230 @@
+{
+  "total_test_samples": 513,
+  "total_errors": 99,
+  "total_false_positives": 66,
+  "total_false_negatives": 33,
+  "false_positives_top10": [
+    {
+      "id": "article_2133",
+      "source": "SaoStar",
+      "category": "Giáo dục & Học đường",
+      "title_clean": "Video: Nam sinh xin quả xòai qua camera, chủ nhà xem lại được phen cười ngất",
+      "lead_clean": "Chỉ với vài câu nói lễ phép trước camera, nam sinh này không chỉ xin được xòai nhà dân mà còn khiến dân mạng \"lụi tim\" vì sự dễ thương và chân thành.",
+      "true_label": "non-clickbait",
+      "pred_label": "clickbait",
+      "prob_clickbait": 0.9889,
+      "linguistic_comment": "False Positive (Nhầm Non-Clickbait thành Clickbait) do chứa tính từ/động từ mạnh thường gặp ở tin giật tít."
+    },
+    {
+      "id": "article_0888",
+      "source": "Tuổi Trẻ",
+      "category": "Kinh doanh & Kinh tế",
+      "title_clean": "Chóang vì hàng giả tinh vi như hàng thật",
+      "lead_clean": "Hàng giả hiện nay không còn là những món đồ nhái vụng về với kiểu dáng thô kệch, bao bì sơ sài như trước mà được \"biến hóa\" tinh vi đến mức đánh lừa cả người sành sỏi.",
+      "true_label": "non-clickbait",
+      "pred_label": "clickbait",
+      "prob_clickbait": 0.9833,
+      "linguistic_comment": "False Positive (Nhầm Non-Clickbait thành Clickbait) do nội dung thuộc chủ đề 'Kinh doanh & Kinh tế' có tình tiết vụ việc kịch tính dù cách đưa tin chính thống."
+    },
+    {
+      "id": "article_3276",
+      "source": "Báo Mới",
+      "category": "Sức khỏe & Đời sống",
+      "title_clean": "Lái xe đi nghỉ mát, cả gia đình được buổi 'xông hơi' vì điều hòa ô tô giở chứng",
+      "lead_clean": "Gia đình 4 người lái xe ô tô đi du lịch thì điều hòa hỏng giữa trời nắng, chiếc xe trở thành phòng xông hơi bất đắc dĩ. Chuyên nghỉ mát 'tóat mồ hôi hột' là có thật.",
+      "true_label": "non-clickbait",
+      "pred_label": "clickbait",
+      "prob_clickbait": 0.9663,
+      "linguistic_comment": "False Positive (Nhầm Non-Clickbait thành Clickbait) do chứa cụm từ trích dẫn trực tiếp tạo cảm giác kịch tính."
+    },
+    {
+      "id": "article_2694",
+      "source": "24h",
+      "category": "Other",
+      "title_clean": "Nhan sắc quá khứ trái ngược của Tân Hoa, Á hậu Hòan vũ Việt Nam: Người ngây thơ, người quyến rũ, cá tính",
+      "lead_clean": "Nhan sắc thời quá khứ của 2 nàng hậu cũng một chín một mười.",
+      "true_label": "non-clickbait",
+      "pred_label": "clickbait",
+      "prob_clickbait": 0.9624,
+      "linguistic_comment": "False Positive (Nhầm Non-Clickbait thành Clickbait) do nội dung thuộc chủ đề 'Other' có tình tiết vụ việc kịch tính dù cách đưa tin chính thống."
+    },
+    {
+      "id": "article_2596",
+      "source": "Thanh Niên",
+      "category": "Other",
+      "title_clean": "Hoa hậu Khánh Vân: Tôi được chồng yêu chiều nên làm vợ cũng thỏai mái",
+      "lead_clean": "Dịp xuân Ất Tỵ, Hoa hậu Khánh Vân có những tiết lộ với Thanh Niên về cái tết đầu tiên sau khi kết hôn.",
+      "true_label": "non-clickbait",
+      "pred_label": "clickbait",
+      "prob_clickbait": 0.961,
+      "linguistic_comment": "False Positive (Nhầm Non-Clickbait thành Clickbait) do nội dung thuộc chủ đề 'Other' có tình tiết vụ việc kịch tính dù cách đưa tin chính thống."
+    },
+    {
+      "id": "article_0543",
+      "source": "Báo Mới",
+      "category": "Quốc tế",
+      "title_clean": "Không phận bị xé nát, hàng không tòan cầu lao đao trước cơn bão xung đột",
+      "lead_clean": "Khi nhìn vào bản đồ thế giới hiển thị tất cả máy bay đang bay trên không, điều nổi bật nhất ngòai con số chóang ngợp về lượng máy bay là những khỏang trống khổng lồ trên bầu trời, ",
+      "true_label": "non-clickbait",
+      "pred_label": "clickbait",
+      "prob_clickbait": 0.9268,
+      "linguistic_comment": "False Positive (Nhầm Non-Clickbait thành Clickbait) do nội dung thuộc chủ đề 'Quốc tế' có tình tiết vụ việc kịch tính dù cách đưa tin chính thống."
+    },
+    {
+      "id": "article_1837",
+      "source": "VietNamNet",
+      "category": "Sức khỏe & Đời sống",
+      "title_clean": "Nghỉ việc lương cao để ở nhà chăm con, 'bố bỉm sữa' bị viêm khớp, trầm cảm",
+      "lead_clean": "TRUNG QUỐC - Người đàn ông nghỉ việc lương cao để làm bố tòan thời gian nhưng cuối cùng bị tổn thương cả thể chất lẫn tinh thần, viêm khớp, trầm cảm và ly hôn.",
+      "true_label": "non-clickbait",
+      "pred_label": "clickbait",
+      "prob_clickbait": 0.9253,
+      "linguistic_comment": "False Positive (Nhầm Non-Clickbait thành Clickbait) do chứa cụm từ trích dẫn trực tiếp tạo cảm giác kịch tính."
+    },
+    {
+      "id": "article_1470",
+      "source": "Thanh Niên",
+      "category": "Sức khỏe & Đời sống",
+      "title_clean": "Thêm nhiều lợi ích bất ngờ từ đu đủ",
+      "lead_clean": "Đu đủ không chỉ là một món ăn giải nhiệt mà còn mang đến hàng lọat lợi ích cho cơ thể, từ tăng cường thị lực đến hỗ trợ tiêu hóa và bảo vệ tim mạch.",
+      "true_label": "non-clickbait",
+      "pred_label": "clickbait",
+      "prob_clickbait": 0.9249,
+      "linguistic_comment": "False Positive (Nhầm Non-Clickbait thành Clickbait) do chứa tính từ/động từ mạnh thường gặp ở tin giật tít."
+    },
+    {
+      "id": "article_1028",
+      "source": "24h",
+      "category": "Kinh doanh & Kinh tế",
+      "title_clean": "Vợ chồng Hà Nội rời phố về biển, chi tiền \"biến\" nhà cũ thành homestay đẹp như mơ",
+      "lead_clean": "Căn nhà rộng 134m2 với 1 phòng khách và 3 phòng ngủ, được cải tạo trong vòng chưa đầy 2 tháng hết tổng cộng 700 triệu đồng.",
+      "true_label": "non-clickbait",
+      "pred_label": "clickbait",
+      "prob_clickbait": 0.9148,
+      "linguistic_comment": "False Positive (Nhầm Non-Clickbait thành Clickbait) do chứa cụm từ trích dẫn trực tiếp tạo cảm giác kịch tính."
+    },
+    {
+      "id": "article_1478",
+      "source": "Thanh Niên",
+      "category": "Sức khỏe & Đời sống",
+      "title_clean": "Có nên sử dụng miếng dán mụn?",
+      "lead_clean": "Một trong những sản phẩm điều trị mụn được ưa chuộng nhất hiện nay là miếng dán mụn.",
+      "true_label": "non-clickbait",
+      "pred_label": "clickbait",
+      "prob_clickbait": 0.9106,
+      "linguistic_comment": "False Positive (Nhầm Non-Clickbait thành Clickbait) do tiêu đề dùng câu hỏi tu từ/dấu cảm thán."
+    }
+  ],
+  "false_negatives_top10": [
+    {
+      "id": "article_3347",
+      "source": "Tuổi Trẻ",
+      "category": "Sức khỏe & Đời sống",
+      "title_clean": "Vào viện xin cấp cứu, chưa kịp chuyển viện theo ý muốn đã ra tay đấm điều dưỡng",
+      "lead_clean": "Thanh niên 25 tuổi đến Bệnh viện Đa khoa tỉnh Khánh Hòa cấp cứu, sau đó đề nghị được chuyển đi cơ sở y tế khác điều trị. Trong khi nhân viên bệnh viện đang xử lý yêu cầu, anh này đ",
+      "true_label": "clickbait",
+      "pred_label": "non-clickbait",
+      "prob_clickbait": 0.0226,
+      "linguistic_comment": "False Negative (Bỏ sót Clickbait tinh vi) do không dùng dấu câu cảm thán (? / !), không chứa từ khóa giật tít lộ liễu mà dùng lối viết ẩn ý/bỏ lửng chủ ngữ tinh vi (curiosity gap)."
+    },
+    {
+      "id": "article_0195",
+      "source": "24h",
+      "category": "Tin tức tổng hợp",
+      "title_clean": "Thời tiết miền Bắc những ngày tới ra sao?",
+      "lead_clean": "Những ngày tới, miền Bắc duy trì thời tiết ngày nắng nhẹ, ít mưa, riêng chiều tối và đêm, khu vực vùng núi, trung du có mưa vừa, mưa to đến rất to, kèm theo lốc sét và gió giật mạn",
+      "true_label": "clickbait",
+      "pred_label": "non-clickbait",
+      "prob_clickbait": 0.0312,
+      "linguistic_comment": "False Negative (Bỏ sót Clickbait tinh vi) do không chứa từ khóa giật tít lộ liễu mà dùng lối viết ẩn ý/bỏ lửng chủ ngữ tinh vi (curiosity gap), cấu trúc tiêu đề ngắn gọn giống tin tức thông thường."
+    },
+    {
+      "id": "article_3567",
+      "source": "24h",
+      "category": "Xe & Vận tải",
+      "title_clean": "Ford Territory - Khám phá \"lãnh thổ\" riêng trong thế giới crossover",
+      "lead_clean": "Ford Territory - mẫu crossover hạng C đình đám tại Việt Nam, với thiết kế hiện đại và công nghệ an tòan vượt trội.",
+      "true_label": "clickbait",
+      "pred_label": "non-clickbait",
+      "prob_clickbait": 0.0316,
+      "linguistic_comment": "False Negative (Bỏ sót Clickbait tinh vi) do không dùng dấu câu cảm thán (? / !), không chứa từ khóa giật tít lộ liễu mà dùng lối viết ẩn ý/bỏ lửng chủ ngữ tinh vi (curiosity gap), cấu trúc tiêu đề ngắn gọn giống tin tức thông thường."
+    },
+    {
+      "id": "article_2930",
+      "source": "SaoStar",
+      "category": "Du lịch & Ẩm thực",
+      "title_clean": "Hội An 2025: Khi phố cổ lên đèn và ký ức bừng sáng",
+      "lead_clean": "Trong sắc vàng rêu phong và ánh lồng đèn lấp lánh, phố cổ Hội An như một giấc mơ chậm rãi trôi qua từng mái ngói, từng nhịp cầu.",
+      "true_label": "clickbait",
+      "pred_label": "non-clickbait",
+      "prob_clickbait": 0.0371,
+      "linguistic_comment": "False Negative (Bỏ sót Clickbait tinh vi) do không dùng dấu câu cảm thán (? / !), không chứa từ khóa giật tít lộ liễu mà dùng lối viết ẩn ý/bỏ lửng chủ ngữ tinh vi (curiosity gap)."
+    },
+    {
+      "id": "article_3479",
+      "source": "Báo Mới",
+      "category": "Xe & Vận tải",
+      "title_clean": "Mitsubishi hé lộ mẫu xe mới bằng máy bay trực thăng",
+      "lead_clean": "Mitsubishi Indonesia vừa khởi động chiến dịch hé lộ một mẫu xe hòan tòan mới có thể là bản thương mại của DST Concept.",
+      "true_label": "clickbait",
+      "pred_label": "non-clickbait",
+      "prob_clickbait": 0.0431,
+      "linguistic_comment": "False Negative (Bỏ sót Clickbait tinh vi) do không dùng dấu câu cảm thán (? / !), không chứa từ khóa giật tít lộ liễu mà dùng lối viết ẩn ý/bỏ lửng chủ ngữ tinh vi (curiosity gap), cấu trúc tiêu đề ngắn gọn giống tin tức thông thường."
+    },
+    {
+      "id": "article_2632",
+      "source": "VietNamNet",
+      "category": "Chính trị & An ninh",
+      "title_clean": "Bắt 6 đối tượng hiếp dâm bé gái trong rừng cao su ở Đắk Lắk",
+      "lead_clean": "Công an tỉnh Đắk Lắk vừa khởi tố, bắt tạm giam 6 đối tượng để điều tra về hành vi hiếp dâm bé gái 14 tuổi trong rừng cao su.",
+      "true_label": "clickbait",
+      "pred_label": "non-clickbait",
+      "prob_clickbait": 0.053,
+      "linguistic_comment": "False Negative (Bỏ sót Clickbait tinh vi) do không dùng dấu câu cảm thán (? / !), không chứa từ khóa giật tít lộ liễu mà dùng lối viết ẩn ý/bỏ lửng chủ ngữ tinh vi (curiosity gap)."
+    },
+    {
+      "id": "article_1930",
+      "source": "Báo Mới",
+      "category": "Other",
+      "title_clean": "Carlos Alcaraz cảnh báo các đối thủ tại Wimbledon",
+      "lead_clean": "Carlos Alcaraz cảnh báo các đối thủ tại Wimbledon sau khi tay vợt số 2 thế giới thể hiện phong độ thăng hoa bằng chức vô địch Queen's Club lần thứ hai.",
+      "true_label": "clickbait",
+      "pred_label": "non-clickbait",
+      "prob_clickbait": 0.0557,
+      "linguistic_comment": "False Negative (Bỏ sót Clickbait tinh vi) do không dùng dấu câu cảm thán (? / !), không chứa từ khóa giật tít lộ liễu mà dùng lối viết ẩn ý/bỏ lửng chủ ngữ tinh vi (curiosity gap), cấu trúc tiêu đề ngắn gọn giống tin tức thông thường."
+    },
+    {
+      "id": "article_0308",
+      "source": "VnExpress",
+      "category": "Quốc tế",
+      "title_clean": "Lý do ông Trump quyết định không kích Iran",
+      "lead_clean": "Ông Trump ra lệnh tập kích ba cơ sở hạt nhân Iran do các đòn tập kích của Israel dường như không gây thiệt hại đủ nặng, cũng như nhằm ép Tehran đàm phán.",
+      "true_label": "clickbait",
+      "pred_label": "non-clickbait",
+      "prob_clickbait": 0.0585,
+      "linguistic_comment": "False Negative (Bỏ sót Clickbait tinh vi) do không dùng dấu câu cảm thán (? / !), không chứa từ khóa giật tít lộ liễu mà dùng lối viết ẩn ý/bỏ lửng chủ ngữ tinh vi (curiosity gap), cấu trúc tiêu đề ngắn gọn giống tin tức thông thường."
+    },
+    {
+      "id": "article_3649",
+      "source": "24h",
+      "category": "Giải trí & Showbiz",
+      "title_clean": "Gà 'leo' mái nhà, heo được người dân hối hả 'bế' đi chạy lũ",
+      "lead_clean": "Cơn mưa lớn ngày 21/6, gây ngập lụt nhiều nơi ở các xã Bá Xuyên, Bách Quang, Bình Sơn, Cải Đan, Châu Sơn, Lương Ơn, Mỏ Chè, Phố Cò, Tân Quang, Thắng Lợi (TP Sông Công, Thái Nguyên)",
+      "true_label": "clickbait",
+      "pred_label": "non-clickbait",
+      "prob_clickbait": 0.0586,
+      "linguistic_comment": "False Negative (Bỏ sót Clickbait tinh vi) do không dùng dấu câu cảm thán (? / !), không chứa từ khóa giật tít lộ liễu mà dùng lối viết ẩn ý/bỏ lửng chủ ngữ tinh vi (curiosity gap)."
+    },
+    {
+      "id": "article_3341",
+      "source": "VnExpress",
+      "category": "Other",
+      "title_clean": "4 quán cơm gà khách nên thử khi đến Hội An",
+      "lead_clean": "Khám phá ẩm thực Hội An, du khách nên thử các quán cơm gà lâu năm ở trung tâm như cơm gà Bà Buội hay Hương - kiệt Sica.",
+      "true_label": "clickbait",
+      "pred_label": "non-clickbait",
+      "prob_clickbait": 0.0701,
+      "linguistic_comment": "False Negative (Bỏ sót Clickbait tinh vi) do không dùng dấu câu cảm thán (? / !), không chứa từ khóa giật tít lộ liễu mà dùng lối viết ẩn ý/bỏ lửng chủ ngữ tinh vi (curiosity gap), cấu trúc tiêu đề ngắn gọn giống tin tức thông thường."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+<section id="s10-arch" data-transition="fade" style="background:#FBFBF8;color:#14213D;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:28px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;font-weight:700;color:#C85A17;text-transform:uppercase">PHẦN IV · KIẾN TRÚC KỸ THUẬT &amp; TRIỂN KHAI HỆ THỐNG</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:48px;font-weight:700;line-height:1.12;color:#14213D">Quét DOM Đa năng, Suy diễn 2 Tầng &amp; Kiểm duyệt Phản hồi</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#1D5B9B">1. DOM Scraping &amp; Safe Injection (content.js)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36">Quét bộ chọn thích ứng cho 15+ báo Việt Nam (<b>h1–h4 a, .title-news a, a.title…</b>), lọc nhiễu menu (≥ 6 từ, ≥ 26 ký tự), tìm Sapo qua <b>Element.closest()</b> và chèn nhãn cô lập CSS (<b>.vn-acb-*</b>) không làm vỡ giao diện báo.</p>
+</div>
+<div style="background:#14213D;color:#FBFBF8;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#F6AD55">2. Two-Tier Inference (Online ⇄ Offline)</h3>
+<p style="font-size:24px;color:#E6EEF6;line-height:1.36"><b>Online:</b> Gọi FastAPI <b>/api/predict_batch</b> chạy Hybrid Ensemble. <b>Offline Fallback:</b> Khi tắt server, chạy Local ML đọc <b>model_weights.json</b> (<b>800 n-gram dương + 800 n-gram âm</b> xuất từ Logistic Regression + 5 luật cảm thán).</p>
+</div>
+<div style="background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#C85A17">3. Độ trễ Mô hình vs Độ trễ Toàn hệ thống</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36">Thời gian suy diễn mô hình đạt <b>0.523 ms/mẫu</b> (Server) và <b>&lt; 1 ms</b> (Local JS). Tổng độ trễ toàn trình của Extension (quét DOM + HTTP Batch 25 bài + vẽ UI) đạt <b>15–40 ms/lô</b>.</p>
+</div>
+<div style="background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#14213D">4. Active Learning có Kiểm duyệt (Human-in-the-loop)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.36">Nút <b>Báo nhầm lẫn</b> gửi mẫu về <b>POST /api/feedback</b> lưu vào <b>user_feedback.jsonl</b>. Dữ liệu được con người hậu kiểm trước khi nạp lại vào tập huấn luyện để chống nhiễu (Data Poisoning).</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#5C6777">Slide 10 / 12 · Kiến trúc Hybrid Cloud–Edge AI đảm bảo độ sẵn sàng 100% cả khi Online lẫn Offline</p>
+<aside>Làm rõ cơ chế quét DOM, nguồn gốc 1,600 trọng số trong model_weights.json, sự khác biệt giữa độ trễ mô hình với độ trễ toàn trình và quy trình kiểm duyệt phản hồi người dùng.</aside>
+</section>

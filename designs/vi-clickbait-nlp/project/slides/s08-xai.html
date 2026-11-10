@@ -1,0 +1,28 @@
+<section id="s08-xai" data-transition="fade" style="background:#FBFBF8;color:#14213D;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:700;color:#C85A17;text-transform:uppercase">PHẦN III · GIẢI THÍCH MÔ HÌNH (XAI) &amp; TÁI CẤU TRÚC TIÊU ĐỀ (DE-CLICKBAIT)</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:50px;font-weight:700;line-height:1.12;color:#14213D">Global/Local Feature Attribution &amp; Tháo tít 0% Bịa đặt</h2>
+</div>
+<div style="display:flex;gap:32px;align-items:stretch">
+<div style="flex:6;display:flex;flex-direction:column;justify-content:space-between;gap:18px">
+<div style="background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#C85A17">1. Global Feature Importance (Toàn cục)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.35"><b>Đẩy về Giật tít:</b> bất_ngờ (+2.72), khiến (+2.18), [HC]_has_question (+2.16), gây (+1.84), [HC]_has_ellipsis (+1.68), tiết_lộ (+1.57). <b>Đẩy về Không giật tít:</b> báo_chí (-1.20), đà_nẵng (-1.13), việt_nam (-1.11).</p>
+</div>
+<div style="background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#1D5B9B">2. Local Token Attribution (Giải thích từng bài)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.35">Tính điểm đóng góp cục bộ <b>Score(t_i) = TF-IDF(t_i) × w_i</b> để tô màu trực tiếp các từ khóa kích động (Cam/Đỏ) và từ khóa trung lập (Xanh) xuất hiện trong bài báo đó.</p>
+</div>
+<div style="background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#14213D">3. De-clickbait (Hậu xử lý Trích xuất từ Sapo)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.35">Không dùng LLM sinh tự do (tránh ảo giác/hallucination) mà áp dụng <b>Extractive Rule-based</b>: trích xuất câu sự kiện đầu tiên từ Sapo (15–145 ký tự), đảm bảo <b>0% bịa đặt thông tin</b>.</p>
+</div>
+</div>
+<div style="flex:5;background:#FFFFFF;border:1px solid #DCD7CD;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:12px">
+<img src="/_blob/aea5b9ca861fb341a4120da7c3eb24f5" alt="Top 20 đặc trưng n-gram hướng về Clickbait và Non-Clickbait" style="width:580px;height:420px;object-fit:contain;border-radius:8px">
+<p style="font-size:24px;font-weight:600;color:#3D4856;text-align:center">Top 20 n-gram đẩy về Giật tít (Đỏ) &amp; Không giật tít (Xanh)</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#5C6777">Slide 08 / 12 · Phân biệt rõ XAI (Giải thích dự đoán) với De-clickbait (Trích xuất tiêu đề trung lập từ Sapo)</p>
+<aside>Phân biệt rõ Global Feature Importance với Local Explanation cho từng bài báo, và giải thích tại sao tính năng Tháo tít dùng phương pháp trích xuất từ Sapo để đảm bảo không bịa đặt thông tin.</aside>
+</section>

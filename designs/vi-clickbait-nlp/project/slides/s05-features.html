@@ -1,0 +1,60 @@
+<section id="s05-features" data-transition="fade" style="background:#FBFBF8;color:#14213D;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:28px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;font-weight:700;color:#1D5B9B;text-transform:uppercase">PHẦN II · KỸ THUẬT ĐẶC TRƯNG &amp; ABLATION STUDY (16,012 CHIỀU)</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:50px;font-weight:700;line-height:1.12;color:#14213D">Không gian Dual TF-IDF, 12 Hand-crafted &amp; Ablation Study</h2>
+</div>
+<div style="display:flex;gap:28px;align-items:stretch">
+<div style="flex:1;background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#1D5B9B">Dual-Space TF-IDF (16,000 chiều)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.35">Ghép nối <b>TF-IDF(Title + [SEP] + Sapo)</b> (10,000 chiều, 1–2 grams, sublinear TF) với <b>TF-IDF(Title) × 1.25</b> (6,000 chiều) để Sapo dài không làm loãng từ khóa giật tít trên tiêu đề.</p>
+</div>
+<div style="flex:1;background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:28px;font-weight:700;color:#C85A17">12 Đặc trưng Thủ công (MinMaxScaler)</h3>
+<p style="font-size:24px;color:#3D4856;line-height:1.35">Độ dài từ &amp; ký tự của Title/Sapo, tỷ lệ <b>len(Title)/len(Sapo)</b>, số từ viết HOA toàn bộ, tỷ lệ chữ hoa và 5 cờ dấu câu cảm thán (<b>?, !, &quot;…&quot;, …, chữ số</b>).</p>
+</div>
+</div>
+<table style="width:100%;font-size:24px;color:#14213D;border:1px solid #DCD7CD;border-radius:12px">
+<tr style="background:#14213D;color:#FBFBF8">
+<th style="width:36%;text-align:left;padding:12px">Cấu hình Đặc trưng Đầu vào (Test N = 513)</th>
+<th style="width:13%;text-align:center;padding:12px">LR Acc</th>
+<th style="width:13%;text-align:center;padding:12px">LR Macro-F1</th>
+<th style="width:13%;text-align:center;padding:12px">LR AUC</th>
+<th style="width:12%;text-align:center;padding:12px">SVM Acc</th>
+<th style="width:13%;text-align:center;padding:12px">SVM Macro-F1</th>
+</tr>
+<tr style="background:#FFFFFF">
+<td style="text-align:left;padding:12px">1. Only Title (Chỉ TF-IDF 10,000 chiều)</td>
+<td style="text-align:center;padding:12px">78.95%</td>
+<td style="text-align:center;padding:12px">76.58%</td>
+<td style="text-align:center;padding:12px">85.64%</td>
+<td style="text-align:center;padding:12px">79.92%</td>
+<td style="text-align:center;padding:12px">76.41%</td>
+</tr>
+<tr style="background:#F2EFE9">
+<td style="text-align:left;padding:12px">1b. Only Title + 12 Hand-crafted</td>
+<td style="text-align:center;padding:12px">79.73%</td>
+<td style="text-align:center;padding:12px">77.19%</td>
+<td style="text-align:center;padding:12px">85.00%</td>
+<td style="text-align:center;padding:12px">80.90%</td>
+<td style="text-align:center;padding:12px">77.27%</td>
+</tr>
+<tr style="background:#FFFFFF">
+<td style="text-align:left;padding:12px">2. Title + Sapo (Dual TF-IDF 16,000 chiều)</td>
+<td style="text-align:center;padding:12px">79.34%</td>
+<td style="text-align:center;padding:12px">77.08%</td>
+<td style="text-align:center;padding:12px">86.54%</td>
+<td style="text-align:center;padding:12px">80.12%</td>
+<td style="text-align:center;padding:12px">76.43%</td>
+</tr>
+<tr style="background:#E6F0FA">
+<td style="text-align:left;padding:12px">3. Title + Sapo + 12 Hand-crafted (Full)</td>
+<td style="text-align:center;padding:12px;color:#1D5B9B">81.09%</td>
+<td style="text-align:center;padding:12px;color:#C85A17">78.76% (+2.18%)</td>
+<td style="text-align:center;padding:12px">86.34%</td>
+<td style="text-align:center;padding:12px;color:#1D5B9B">81.29%</td>
+<td style="text-align:center;padding:12px;color:#C85A17">77.97% (+1.56%)</td>
+</tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#5C6777">Slide 05 / 12 · Ablation Study chứng minh Sapo + 12 Hand-crafted tăng +2.18% Macro-F1 trên Tập Test</p>
+<aside>Trình bày thiết kế không gian Dual TF-IDF 16,000 chiều ghép với 12 đặc trưng thủ công, chứng minh hiệu quả bằng bảng Ablation Study thực nghiệm trên 513 mẫu Test.</aside>
+</section>

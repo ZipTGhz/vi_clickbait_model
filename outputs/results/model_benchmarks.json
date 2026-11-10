@@ -96,6 +96,30 @@
     ]
   },
   {
+    "group": "Transformer (Pre-trained)",
+    "model": "PhoBERT-base-v2",
+    "input_type": "Title + Lead",
+    "accuracy": 0.8070175438596491,
+    "precision_clickbait": 0.6580310880829016,
+    "recall_clickbait": 0.79375,
+    "f1_clickbait": 0.7195467422096318,
+    "f1_non_clickbait": 0.8528974739970282,
+    "macro_f1": 0.78622210810333,
+    "roc_auc": 0.8731586402266289,
+    "train_time_sec": 193.49,
+    "infer_ms_per_sample": 71.932,
+    "confusion_matrix": [
+      [
+        287,
+        66
+      ],
+      [
+        33,
+        127
+      ]
+    ]
+  },
+  {
     "group": "Hybrid Ensemble (SOTA)",
     "model": "Ensemble (Linear SVM + BiLSTM + TextCNN)",
     "input_type": "Title + Lead",

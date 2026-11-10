@@ -1,0 +1,28 @@
+<section id="s02-objectives" data-transition="fade" style="background:#FBFBF8;color:#14213D;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:space-between;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:700;color:#C85A17;text-transform:uppercase">PHẦN I · MỤC TIÊU, PHÁT BIỂU BÀI TOÁN &amp; CÁCH XỬ LÝ</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:52px;font-weight:700;line-height:1.12;color:#14213D">Mục tiêu Đề tài &amp; Quy trình Xử lý Bài toán 5 Bước</h2>
+</div>
+<div style="display:flex;gap:32px;align-items:stretch">
+<div style="flex:5;display:flex;flex-direction:column;justify-content:space-between;gap:20px">
+<div style="background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:30px;font-weight:700;color:#1D5B9B">Phát biểu Toán học (Title + Sapo)</h3>
+<p style="font-size:25px;color:#3D4856;line-height:1.38">Cho cặp văn bản (Title T, Sapo S), tìm ánh xạ f(T, S) sang nhãn {0, 1}. Dấu hỏi (?) ở tin Giật tít gấp <b>6 lần</b> (<b>20.38%</b> vs <b>3.41%</b>), ngoặc kép gấp <b>2.8 lần</b> (<b>32.11%</b> vs <b>11.66%</b>), cần đối chiếu với Sapo để kiểm chứng khoảng trống tò mò.</p>
+</div>
+<div style="background:#F2EFE9;border:1px solid #DCD7CD;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:30px;font-weight:700;color:#C85A17">4 Mục tiêu Định lượng của Đề tài</h3>
+<p style="font-size:25px;color:#3D4856;line-height:1.38"><b>(1)</b> Chuẩn hóa 3,414 bài báo &amp; chống học vẹt nguồn tin · <b>(2)</b> Đạt Accuracy <b>81.29%</b>, ROC-AUC <b>86.41%</b>, độ trễ <b>&lt; 1 ms</b> · <b>(3)</b> Giải thích từ khóa XAI &amp; Tháo tít 0% bịa đặt · <b>(4)</b> Đóng gói Gradio &amp; Chrome Extension 3 tầng.</p>
+</div>
+</div>
+<div style="flex:6;background:#14213D;color:#FBFBF8;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:14px">
+<h3 style="font-size:30px;font-weight:700;color:#F6AD55">Quy trình Xử lý Bài toán 5 Bước (Methodology)</h3>
+<p style="font-size:24px;color:#E6EEF6;line-height:1.35"><b>Bước 1 (EDA &amp; Chia tập):</b> 3,414 mẫu từ 8 báo, xóa cột source, chia Stratified 70/15/15 (2,389 / 512 / 513).</p>
+<p style="font-size:24px;color:#E6EEF6;line-height:1.35"><b>Bước 2 (Tiền xử lý Tiếng Việt):</b> Khử dính chữ VnExpress (163 mẫu + 35 CamelCase), cắt đuôi Báo Mới (716 mẫu), Unicode NFC + PyVi.</p>
+<p style="font-size:24px;color:#E6EEF6;line-height:1.35"><b>Bước 3 (Đặc trưng &amp; Ablation):</b> Dual TF-IDF (16,000 chiều, Title × 1.25) + 12 Hand-crafted features (+2.18% Macro-F1).</p>
+<p style="font-size:24px;color:#E6EEF6;line-height:1.35"><b>Bước 4 (Huấn luyện &amp; Ensemble):</b> Đối sánh NB, LR, SVM, RF, BiLSTM, TextCNN, PhoBERT &amp; Soft-Voting Ensemble.</p>
+<p style="font-size:24px;color:#E6EEF6;line-height:1.35"><b>Bước 5 (XAI &amp; Triển khai):</b> Token Attribution + Extractive De-clickbait + Extension 2 tầng suy diễn (Online/Offline).</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#5C6777">Slide 02 / 12 · Phát biểu bài toán (Title + Sapo), 4 mục tiêu và quy trình xử lý 5 bước</p>
+<aside>Trình bày phát biểu toán học kết hợp Title + Sapo, 4 mục tiêu định lượng và toàn bộ quy trình 5 bước xử lý bài toán từ dữ liệu đến triển khai sản phẩm.</aside>
+</section>

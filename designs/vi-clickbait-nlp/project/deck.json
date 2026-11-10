@@ -1,0 +1,57 @@
+{
+  "v": 4,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-11-05T13:28:00Z"
+  },
+  "lists": "css",
+  "title": "Hệ thống Phát hiện & Giải thích Tin Giật Tít Tiếng Việt",
+  "cover": "s01-intro",
+  "order": [
+    "s01-intro",
+    "s02-objectives",
+    "s03-dataset",
+    "s04-preprocess",
+    "s05-features",
+    "s06-models",
+    "s07-results",
+    "s08-xai",
+    "s09-product",
+    "s10-arch",
+    "s11-demo",
+    "s12-conclusion"
+  ],
+  "sections": {
+    "sec1": {
+      "description": "Phần I: Giới thiệu đề tài, lý do chọn bài toán, mục tiêu và dữ liệu",
+      "start": "s01-intro"
+    },
+    "sec2": {
+      "description": "Phần II: Tiền xử lý tiếng Việt, kỹ thuật đặc trưng và thực nghiệm mô hình",
+      "start": "s04-preprocess"
+    },
+    "sec3": {
+      "description": "Phần III: Giải thích mô hình (XAI) và tái cấu trúc tiêu đề (De-clickbait)",
+      "start": "s08-xai"
+    },
+    "sec4": {
+      "description": "Phần IV: Triển khai Chrome Extension 3 tầng, trình diễn và kết luận",
+      "start": "s09-product"
+    }
+  },
+  "faces": {
+    "source-serif-4": {
+      "family": "Source Serif 4",
+      "href": "https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&display=swap"
+    },
+    "ibm-plex-sans": {
+      "family": "IBM Plex Sans",
+      "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap"
+    },
+    "jetbrains-mono": {
+      "family": "JetBrains Mono",
+      "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
+    }
+  },
+  "designSystems": []
+}
